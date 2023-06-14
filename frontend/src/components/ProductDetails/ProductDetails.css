@@ -1,0 +1,151 @@
+.product{
+    /* border: 1px solid #333333; */
+    margin: 5rem 0;
+}
+
+.swiper{
+    width: 100%;
+    /* background: red; */
+}
+.swiper img{
+    width: 100%;
+}
+
+.mySlider2{
+    margin-top: 5px;
+}
+.mySlider2 .swiper-wrapper{
+    padding-bottom: 0.8rem;
+}
+.mySlider2 .swiper-slide{
+    opacity: 60%;
+}
+.mySlider2 .swiper-slide-thumb-active{
+    opacity: 100%;
+}
+
+.product-details{
+    display: flex;
+    flex-direction: column;
+}
+.product-heading{
+    font: 500 1.8rem "Poppins";
+    color: #333333;
+    text-transform: uppercase;
+}
+
+.product-rating{
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #5c5c5c;
+}
+.product-rating > div{
+    margin-right: 3px;
+    font-size: 0.95rem;
+    color: #111111;
+}
+.product-sku{
+    color: #5c5c5c;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+.product-sku span{
+    margin-left: 0.4rem;
+}
+
+.product-price{
+    padding: 0.2rem 0;
+    font-size: 1.4rem;
+    color: #111111;
+}
+.product-price p{
+    font-size: 0.75rem;
+}
+
+.line{
+    margin: 1rem 0;
+}
+
+.p-quantity-box{
+    display: flex;
+    flex-direction: column;
+}
+.p-quantity-box span{
+    font-size: 0.9rem;
+}
+
+.p-quantity{
+    border: 1px solid #c1bfbf;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    width: fit-content;
+}
+
+.p-quantity button{
+    border: none;
+    background: none;
+    padding: 0.4rem 0.9rem;
+}
+.p-quantity input{
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 2.3rem;
+    color: #5c5c5c;
+}
+
+.p-button{
+    text-transform: uppercase;
+    border: none;
+    background: #333333;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.p-shipping{
+    font-size: 0.75rem;
+    padding: 5px 0;
+}
+
+.p-box-2, .p-box-4{
+    font-size: 0.8rem;
+}
+
+.p-box-2 strong, .p-box-4 strong{
+    margin-right: 5px;
+    font-weight: 500;
+}
+
+.tab-content{
+    padding: 10px 12px 10px 12px !important;
+    border-radius: 0 0 3px 3px;
+    border: 0.75px solid #dddddd;
+    margin-top: -1px;
+    font-size: 0.8rem;
+}
+
+.nav-tabs .nav-link{
+    color: #333333;
+    background-color: #f5f5f5;
+    border: 0.75px solid #dddddd;
+    font-size: 0.85rem;
+    border-radius: 0;
+}
+.nav-tabs .nav-link.active{
+    border-bottom: 2px solid #333333;
+    background-color: #ffffff;
+}
+
+/* @media screen and (min-width: 641px){ 
+    .p-quantity button {
+        padding: 7px 14px 8px 14px;
+    }
+} */
