@@ -1,0 +1,20 @@
+
+.product-card{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #333333;
+    width: 18rem;
+    margin: 1rem;
+    transition: all 0.5s;
+    padding-bottom: 0.5rem;
+}
+
+.product-card > img {
+    width: 100%;
+}
+
+.product-card:hover{
+    box-shadow: 0 0 5px rgba(15,15,15,0.26);
+    transform: translateY(-0.5rem);
+}

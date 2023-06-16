@@ -14,6 +14,14 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter product description"],
   },
+  story: {
+    type: String,
+    required: [true, "Please enter product story"],
+  },
+  sku: {
+    type: String,
+    default: "RAASIYAHOME004",
+  },
   price: {
     type: Number,
     required: [true, "Please enter product price"],
@@ -77,6 +85,11 @@ const productSchema = mongoose.Schema({
   countryOfOrigin: {
     type: String,
     default: "India",
+  },
+  registeredAddress: {
+    type: String,
+    default:
+      "Om ShivAmbika Co-Op Hsg Soc, Kalina, Santacruz East, Mumbai-400098",
   },
   packedBy: {
     type: String,
