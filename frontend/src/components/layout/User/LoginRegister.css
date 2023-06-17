@@ -1,0 +1,15 @@
+.login-box, .register-box{
+    max-width: 25rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dddddd;
+    padding: 3rem;
+    text-align: center;
+    margin: 4rem auto;
+}
+
+.link{
+    text-decoration: none;
+    text-align: right;
+    margin: 1rem 0;
+}

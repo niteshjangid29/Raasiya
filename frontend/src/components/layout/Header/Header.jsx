@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 import {
   Navbar,
   NavDropdown,
@@ -60,6 +61,9 @@ const Header = () => {
               Search
             </Button>
           </Form>
+          <Nav.Link href="/login">
+            <FaUser style={{ color: "white", margin: "0 1rem" }} />
+          </Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
