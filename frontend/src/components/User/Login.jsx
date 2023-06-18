@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./LoginRegister.css";
 import { Link } from "react-router-dom";
-import Loader from "../Loader/Loader";
+import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, login } from "../../../actions/userActions";
+import { clearErrors, login } from "../../actions/userActions";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 

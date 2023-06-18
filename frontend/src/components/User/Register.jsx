@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./LoginRegister.css";
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "../Loader/Loader";
-import { register, clearErrors } from "../../../actions/userActions";
+import Loader from "../layout/Loader/Loader";
+import { register, clearErrors } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 

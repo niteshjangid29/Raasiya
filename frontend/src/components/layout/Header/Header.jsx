@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "./Header.css";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import {
   Navbar,
@@ -9,10 +10,51 @@ import {
   Form,
   Button,
 } from "react-bootstrap";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../actions/userActions";
 
 const Header = () => {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const alert = useAlert();
+
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+
+  const options = [
+    { name: "My Account", func: account },
+    { name: "My Orders", func: orders },
+    { name: "My Logout", func: logOutUser },
+  ];
+
+  if (isAuthenticated) {
+    if (user.role === "admin") {
+      options.unshift({ name: "Dashboard", func: dashboard });
+    }
+    if (user.role === "superadmin") {
+      options.unshift({ name: "Super Dashboard", func: superdashboard });
+    }
+  }
+
+  function account() {
+    isAuthenticated ? navigate("/account") : navigate("/login");
+  }
+  // console.log(user.role);
+  function orders() {
+    isAuthenticated ? navigate("/orders") : navigate("/login");
+  }
+  function dashboard() {
+    isAuthenticated ? navigate("/dashboard") : navigate("/login");
+  }
+  function superdashboard() {
+    isAuthenticated ? navigate("/superdashboard") : navigate("/login");
+  }
+  function logOutUser() {
+    navigate("/login");
+    dispatch(logout());
+    alert.success("Logout Successfully");
+  }
 
   const searchSubmitHandler = (e) => {
     e.preventDefault();
@@ -61,9 +103,31 @@ const Header = () => {
               Search
             </Button>
           </Form>
-          <Nav.Link href="/login">
-            <FaUser style={{ color: "white", margin: "0 1rem" }} />
-          </Nav.Link>
+          <div className="dropdown">
+            <Link className="link" to="/login">
+              <button
+                className="btn dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+                onClick={() => navigate("/login")}
+              >
+                <FaUser style={{ color: "white", margin: "0 1rem" }} />
+              </button>
+            </Link>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {options.map((item) => (
+                <li
+                  onClick={item.func}
+                  key={item.name}
+                  style={{ cursor: "pointer" }}
+                >
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
