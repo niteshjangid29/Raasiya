@@ -1,56 +1,47 @@
 import React, { Fragment, useState, useEffect } from "react";
-import "./UpdateProfile.css";
 import { useNavigate } from "react-router-dom";
 import Loader from "../layout/Loader/Loader";
-import {
-  updateProfile,
-  clearErrors,
-  loadUser,
-} from "../../actions/userActions";
+import { updatePassword, clearErrors } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
+import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 
-const UpdateProfile = () => {
+const UpdatePassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.user);
   const { error, loading, isUpdated } = useSelector((state) => state.profile);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const updateProfileSubmit = (e) => {
+  const updatePasswordSubmit = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
 
-    myForm.set("name", name);
-    myForm.set("email", email);
+    myForm.set("oldPassword", oldPassword);
+    myForm.set("newPassword", newPassword);
+    myForm.set("confirmPassword", confirmPassword);
 
-    dispatch(updateProfile(myForm));
+    dispatch(updatePassword(myForm));
   };
 
   useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setEmail(user.email);
-    }
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Profile Updated Successfully");
-      dispatch(loadUser());
+      alert.success("Password Updated Successfully");
       navigate("/account");
-      dispatch({ type: UPDATE_PROFILE_RESET });
+      dispatch({ type: UPDATE_PASSWORD_RESET });
     }
-  }, [dispatch, error, alert, isUpdated, navigate, user]);
+  }, [dispatch, error, alert, isUpdated, navigate]);
 
   return (
     <Fragment>
@@ -58,40 +49,49 @@ const UpdateProfile = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="Update Profile" />
+          <MetaData title="Update Password" />
           <div className="container">
             <div className="register-box">
               <h2>Update Profile</h2>
               <form
                 action=""
-                onSubmit={updateProfileSubmit}
+                onSubmit={updatePasswordSubmit}
                 style={{ display: "flex", flexDirection: "column" }}
               >
                 <div>
                   <input
-                    type="text"
-                    placeholder="Name"
+                    type="password"
                     required
                     className="form-control my-3"
-                    name="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Old Password"
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
                   />
                 </div>
                 <div>
                   <input
-                    type="email"
+                    type="password"
                     required
-                    placeholder="Email"
                     className="form-control my-3"
-                    value={email}
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </div>
+                <div>
+                  <input
+                    type="password"
+                    required
+                    className="form-control my-3"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
+
                 <input
                   type="submit"
-                  value="Update"
+                  value="Change"
                   className="btn btn-primary my-2"
                 />
               </form>
@@ -103,4 +103,4 @@ const UpdateProfile = () => {
   );
 };
 
-export default UpdateProfile;
+export default UpdatePassword;

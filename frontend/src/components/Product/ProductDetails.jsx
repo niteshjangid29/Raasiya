@@ -36,6 +36,22 @@ const ProductDetails = () => {
     dispatch(getProductDetails(id));
   }, [dispatch, id, alert, error]);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    if (product.Stock <= quantity) {
+      return;
+    }
+    const qnty = quantity + 1;
+    setQuantity(qnty);
+  };
+  const decreaseQuantity = () => {
+    if (quantity <= 1) {
+      return;
+    }
+    const qnty = quantity - 1;
+    setQuantity(qnty);
+  };
   //   const options = {
   //     edit: false,
   //     color: "gray",
@@ -145,9 +161,9 @@ const ProductDetails = () => {
                 <div className="p-quantity-box">
                   <span>Quantity:</span>
                   <div className="p-quantity">
-                    <button>-</button>
-                    <input type="number" defaultValue={1} />
-                    <button>+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <input readOnly type="number" value={quantity} />
+                    <button onClick={increaseQuantity}>+</button>
                   </div>
                 </div>
 
