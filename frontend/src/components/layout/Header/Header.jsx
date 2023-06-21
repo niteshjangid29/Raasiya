@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaCartPlus } from "react-icons/fa";
 import {
   Navbar,
   NavDropdown,
@@ -20,11 +20,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
+  const { cartItems } = useSelector((state) => state.cart);
+
   const { user, isAuthenticated } = useSelector((state) => state.user);
 
   const options = [
     { name: "My Account", func: account },
     { name: "My Orders", func: orders },
+    { name: `Cart (${cartItems.length})`, func: cart },
     { name: "My Logout", func: logOutUser },
   ];
 
@@ -43,6 +46,9 @@ const Header = () => {
   // console.log(user.role);
   function orders() {
     isAuthenticated ? navigate("/orders") : navigate("/login");
+  }
+  function cart() {
+    isAuthenticated ? navigate("/cart") : navigate("/login");
   }
   function dashboard() {
     isAuthenticated ? navigate("/dashboard") : navigate("/login");
@@ -103,6 +109,13 @@ const Header = () => {
               Search
             </Button>
           </Form>
+          <div className="">
+            <Link className="link" to="/cart">
+              <button className="btn" type="button">
+                <FaCartPlus style={{ color: "white", margin: "0 1rem" }} />
+              </button>
+            </Link>
+          </div>
           <div className="dropdown">
             <Link className="link" to="/login">
               <button

@@ -20,6 +20,7 @@ import "swiper/css/zoom";
 import "swiper/css/thumbs";
 import "swiper/css/scrollbar";
 import ReviewCard from "./ReviewCard";
+import { addItemsToCart } from "../../actions/cartActions";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -28,13 +29,7 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
   const { id } = useParams();
-  useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-    dispatch(getProductDetails(id));
-  }, [dispatch, id, alert, error]);
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
@@ -52,6 +47,20 @@ const ProductDetails = () => {
     const qnty = quantity - 1;
     setQuantity(qnty);
   };
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success("Item Added to Cart");
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    dispatch(getProductDetails(id));
+  }, [dispatch, id, alert, error]);
+
   //   const options = {
   //     edit: false,
   //     color: "gray",
@@ -167,7 +176,9 @@ const ProductDetails = () => {
                   </div>
                 </div>
 
-                <button className="p-button">Add to Cart</button>
+                <button className="p-button" onClick={addToCartHandler}>
+                  Add to Cart
+                </button>
 
                 <p className="p-shipping">
                   Free shipping on domestic orders above Rs. 2,000
@@ -252,8 +263,8 @@ const ProductDetails = () => {
               {product.reviews && product.reviews[0] ? (
                 <div className="reviews">
                   {product.reviews &&
-                    product.reviews.map((review) => (
-                      <ReviewCard review={review} />
+                    product.reviews.map((review, i) => (
+                      <ReviewCard review={review} key={i} />
                     ))}
                 </div>
               ) : (
