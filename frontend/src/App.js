@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductDetails from "./components/Product/ProductDetails";
@@ -20,6 +20,7 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import Navbar from "./components/layout/Header/Navbar";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -28,6 +29,7 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
+      <Navbar />
       <Header user={user} />
       <Routes>
         <Route exact path="/" element={<Home />} />

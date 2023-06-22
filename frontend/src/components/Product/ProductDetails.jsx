@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Scrollbar, Zoom } from "swiper";
 import "./ProductDetails.css";
-// import ReactStars from "react-rating-stars-component";
+import ReactStars from "react-rating-stars-component";
 import { Tab, Tabs } from "react-bootstrap";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -61,15 +61,16 @@ const ProductDetails = () => {
     dispatch(getProductDetails(id));
   }, [dispatch, id, alert, error]);
 
-  //   const options = {
-  //     edit: false,
-  //     color: "gray",
-  //     activeColor: "tomato",
-  //     value: 3.5,
-  //     size: window.innerWidth < 600 ? 20 : 25,
-  //     isHalf: true,
-  //     a11y: true,
-  //   };
+  const options = {
+    edit: false,
+    value: product.ratings,
+    isHalf: true,
+    size: 25,
+    //     size: window.innerWidth < 600 ? 20 : 25,
+    a11y: true,
+    color: "#C0C49B",
+    activeColor: "#F4D54B",
+  };
   return (
     <Fragment>
       {loading ? (
@@ -139,15 +140,15 @@ const ProductDetails = () => {
               <div className="product-details col-md-6">
                 <h1 className="product-heading">{product.name}</h1>
                 <div className="product-rating">
-                  {/* <ReactStars {...options} /> */}
-                  <div>
+                  <ReactStars {...options} />
+                  {/* <div>
                     {product.ratings}
                     <FaStar />
                     <FaStar />
                     <FaStar />
                     <FaStarHalfAlt />
                     <FaRegStar />
-                  </div>
+                  </div> */}
                   <span className="mt-1">{`(${product.numberOfReviews} Review)`}</span>
                 </div>
                 <p className="product-sku">
