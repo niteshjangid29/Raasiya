@@ -1,0 +1,15 @@
+.MuiStepConnector-line {
+    display: none !important;
+}
+
+.MuiStepConnector-root {
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.349);
+}
+
+.Mui-active {
+    background-color: tomato;
+}
+.MuiStepLabel-label, .MuiStepLabel-iconContainer{
+    background-color: #fff;
+}

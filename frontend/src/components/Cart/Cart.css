@@ -2,16 +2,16 @@
     margin: auto;
     text-align: center;
     padding: 10vmax;
-    height: 50vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.emptyCart>svg {
-    font-size: 5vmax;
-    color: tomato;
+.emptyCart .remove-icon {
+    font-size: 50px !important;
+    color: tomato !important;
 }
 
 .emptyCart>p {

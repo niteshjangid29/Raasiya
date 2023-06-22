@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./LoginRegister.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login } from "../../actions/userActions";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const [searchParams] = useSearchParams();
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -25,6 +26,7 @@ const Login = () => {
     dispatch(login(loginEmail, loginPassword));
   };
 
+  const redirect = searchParams.get("redirect");
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -32,9 +34,9 @@ const Login = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(`/${redirect ? redirect : "account"}`);
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated]);
+  }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
 
   return (
     <Fragment>

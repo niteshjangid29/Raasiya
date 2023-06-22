@@ -3,11 +3,12 @@ import "./Cart.css";
 import CartItemsCard from "./CartItemsCard";
 import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart, removeItemFromCart } from "../../actions/cartActions";
-import { FaRemoveFormat } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -30,11 +31,15 @@ const Cart = () => {
   const deleteCardItems = (id) => {
     dispatch(removeItemFromCart(id));
   };
+
+  const checkOutHandler = () => {
+    navigate("/login?redirect=shipping");
+  };
   return (
     <Fragment>
       {cartItems.length === 0 ? (
         <div className="emptyCart">
-          <FaRemoveFormat />
+          <MdRemoveShoppingCart className="remove-icon" />
           <p>No Product in Your Cart</p>
           <Link to="/products">View Products</Link>
         </div>
@@ -92,7 +97,7 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="checkOutBtn">
-                <button>Check Out</button>
+                <button onClick={checkOutHandler}>Check Out</button>
               </div>
             </div>
           </div>
