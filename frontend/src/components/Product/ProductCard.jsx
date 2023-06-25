@@ -1,7 +1,6 @@
 import React from "react";
 import "./ProductCard.scss";
 import { Link } from "react-router-dom";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
 
 const ProductCard = ({ product }) => {

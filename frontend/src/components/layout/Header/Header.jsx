@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./Header.css";
+import React, { Fragment, useState } from "react";
+import "./Header.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaCartPlus } from "react-icons/fa";
+import { FaUser, FaCartPlus, FaCircle } from "react-icons/fa";
 import {
   Navbar,
   NavDropdown,
@@ -9,12 +9,21 @@ import {
   Nav,
   Form,
   Button,
+  Offcanvas,
 } from "react-bootstrap";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../actions/userActions";
+import HeaderCart from "../../Cart/HeaderCart";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import {
+  addItemsToCart,
+  removeItemFromCart,
+} from "../../../actions/cartActions";
 
 const Header = () => {
+  const [show, setShow] = useState(false);
+
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,6 +79,33 @@ const Header = () => {
       navigate("/search");
     }
   };
+
+  const deleteCardItems = (id) => {
+    dispatch(removeItemFromCart(id));
+  };
+
+  const increaseQuantity = (id, quantity, stock) => {
+    const newQty = quantity + 1;
+
+    if (stock <= quantity) {
+      return;
+    }
+    dispatch(addItemsToCart(id, newQty));
+  };
+
+  const decreaseQuantity = (id, quantity) => {
+    const newQty = quantity - 1;
+    if (quantity <= 1) {
+      return;
+    }
+    dispatch(addItemsToCart(id, newQty));
+  };
+
+  const checkOutHandler = () => {
+    navigate("/login?redirect=shipping");
+    setShow(false);
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -110,11 +146,61 @@ const Header = () => {
             </Button>
           </Form>
           <div className="">
-            <Link className="link" to="/cart">
-              <button className="btn" type="button">
-                <FaCartPlus style={{ color: "white", margin: "0 1rem" }} />
-              </button>
-            </Link>
+            {/* <Link className="link" to="/cart"> */}
+            <button className="btn" type="button" onClick={() => setShow(true)}>
+              <FaCartPlus style={{ color: "white", margin: "0 1rem" }} />
+            </button>
+            {/* </Link> */}
+
+            <Offcanvas
+              show={show}
+              onHide={() => setShow(false)}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>Your Cart</Offcanvas.Title>
+              </Offcanvas.Header>
+              <hr style={{ margin: 0 }} />
+              <Fragment>
+                {cartItems.length === 0 ? (
+                  <div className="EmptyCart">
+                    <MdRemoveShoppingCart />
+                    <p>Your Cart is Empty</p>
+                    <Link to="/products" onClick={() => setShow(false)}>
+                      View Products
+                    </Link>
+                  </div>
+                ) : (
+                  <Fragment>
+                    <Offcanvas.Body>
+                      {cartItems &&
+                        cartItems.map((item) => (
+                          <HeaderCart
+                            item={item}
+                            deleteCardItems={deleteCardItems}
+                            increaseQuantity={increaseQuantity}
+                            decreaseQuantity={decreaseQuantity}
+                          />
+                        ))}
+                      {/* <HeaderCart />
+                      <HeaderCart />
+                      <HeaderCart />
+                      <HeaderCart />
+                      <HeaderCart /> */}
+                    </Offcanvas.Body>
+                    <hr />
+                    <button className="checkout-btn" onClick={checkOutHandler}>
+                      Checkout
+                      <FaCircle />
+                      {`Rs. ${cartItems.reduce(
+                        (acc, item) => acc + item.quantity * item.price,
+                        0
+                      )}`}
+                    </button>
+                  </Fragment>
+                )}
+              </Fragment>
+            </Offcanvas>
           </div>
           <div className="dropdown">
             <Link className="link" to="/login">

@@ -45,7 +45,7 @@ $grey-color: #C0C49B;
         box-shadow: 0 0 4px rgba(15, 15, 15, 0.26);
         > img{
             transform: scale(1.03);
-            transition: all 0.5s;
+            transition: all ease-in-out 1s;
         }
     }
 }

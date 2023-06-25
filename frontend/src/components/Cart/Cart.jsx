@@ -40,7 +40,7 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <div className="emptyCart">
           <MdRemoveShoppingCart className="remove-icon" />
-          <p>No Product in Your Cart</p>
+          <p>Your Cart is Empty</p>
           <Link to="/products">View Products</Link>
         </div>
       ) : (

@@ -21,6 +21,7 @@ import Cart from "./components/Cart/Cart";
 import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Navbar from "./components/layout/Header/Navbar";
+import Footer from "./components/layout/Footer/Footer";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -96,6 +97,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
