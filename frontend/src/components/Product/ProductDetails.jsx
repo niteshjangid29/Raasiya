@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
+import "./ProductDetails.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Scrollbar, Zoom } from "swiper";
-import "./ProductDetails.css";
-import ReactStars from "react-rating-stars-component";
 import { Tab, Tabs } from "react-bootstrap";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -10,7 +9,19 @@ import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProductDetails } from "../../actions/productActions";
+import {
+  clearErrors,
+  getProductDetails,
+  newReview,
+} from "../../actions/productActions";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Rating,
+} from "@mui/material";
 
 // Import Swiper styles
 import "swiper/css";
@@ -21,17 +32,25 @@ import "swiper/css/thumbs";
 import "swiper/css/scrollbar";
 import ReviewCard from "./ReviewCard";
 import { addItemsToCart } from "../../actions/cartActions";
+import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
+  );
+  const { success, error: reviewError } = useSelector(
+    (state) => state.newReview
   );
   const { id } = useParams();
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(4);
+  const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
     if (product.Stock <= quantity) {
@@ -58,18 +77,37 @@ const ProductDetails = () => {
       alert.error(error);
       dispatch(clearErrors());
     }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
+    if (success) {
+      alert.success("Review Submitted Successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
     dispatch(getProductDetails(id));
-  }, [dispatch, id, alert, error]);
+  }, [dispatch, id, alert, error, reviewError, success]);
 
   const options = {
-    edit: false,
     value: product.ratings,
-    isHalf: true,
-    size: 25,
-    //     size: window.innerWidth < 600 ? 20 : 25,
-    a11y: true,
-    color: "#C0C49B",
-    activeColor: "#F4D54B",
+    readOnly: true,
+    precision: 0.5,
+    size: "medium",
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const reviewSubmitHandler = () => {
+    const myForm = new FormData();
+
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("productId", id);
+
+    dispatch(newReview(myForm));
+
+    setOpen(false);
   };
   return (
     <Fragment>
@@ -140,15 +178,7 @@ const ProductDetails = () => {
               <div className="product-details col-md-6">
                 <h1 className="product-heading">{product.name}</h1>
                 <div className="product-rating">
-                  <ReactStars {...options} />
-                  {/* <div>
-                    {product.ratings}
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStarHalfAlt />
-                    <FaRegStar />
-                  </div> */}
+                  <Rating {...options} />
                   <span className="mt-1">{`(${product.numberOfReviews} Review)`}</span>
                 </div>
                 <p className="product-sku">
@@ -177,7 +207,11 @@ const ProductDetails = () => {
                   </div>
                 </div>
 
-                <button className="p-button" onClick={addToCartHandler}>
+                <button
+                  disabled={product.Stock < 1 ? true : false}
+                  className="p-button"
+                  onClick={addToCartHandler}
+                >
                   Add to Cart
                 </button>
 
@@ -257,9 +291,36 @@ const ProductDetails = () => {
                   <FaRegStar />
                 </div>
                 <div>
-                  <button className="review-btn">Write a review</button>
+                  <button className="review-btn" onClick={() => setOpen(true)}>
+                    Write a Review
+                  </button>
                 </div>
               </div>
+              <Dialog open={open} onClose={handleClose} className="review-form">
+                <DialogTitle>Submit Review</DialogTitle>
+                <hr style={{ margin: "0" }} />
+                <DialogContent className="review-content">
+                  <Rating
+                    value={Number(rating)}
+                    onChange={(e) => setRating(e.target.value)}
+                  />
+                  <textarea
+                    cols="30"
+                    rows="5"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    className="comment"
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="secondary">
+                    Cancel
+                  </Button>
+                  <Button onClick={reviewSubmitHandler} color="primary">
+                    Submit
+                  </Button>
+                </DialogActions>
+              </Dialog>
 
               {product.reviews && product.reviews[0] ? (
                 <div className="reviews">

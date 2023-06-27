@@ -176,6 +176,7 @@ const Navbar = () => {
                       {cartItems &&
                         cartItems.map((item) => (
                           <HeaderCart
+                            key={item.product}
                             item={item}
                             deleteCardItems={deleteCardItems}
                             increaseQuantity={increaseQuantity}

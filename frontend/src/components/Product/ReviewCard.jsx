@@ -1,9 +1,14 @@
 import React from "react";
 import "./ReviewCard.css";
 import profilePng from "../../images/Profile.png";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { Rating } from "@mui/material";
 
 const ReviewCard = ({ review }) => {
+  const options = {
+    value: review.rating,
+    readOnly: true,
+    size: "medium",
+  };
   return (
     <div className="review">
       <div>
@@ -11,12 +16,7 @@ const ReviewCard = ({ review }) => {
         <strong>{review.name}</strong>
       </div>
       <div style={{ margin: "0.7rem 0.4rem" }}>
-        {review.rating}
-        <FaStar />
-        <FaStar />
-        <FaStar />
-        <FaStarHalfAlt />
-        <FaRegStar />
+        <Rating {...options} />
       </div>
       <hr className="line" style={{ margin: "0.8rem 0" }} />
       <p>{review.comment}</p>

@@ -1,6 +1,15 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+
 .product{
     /* border: 1px solid #333333; */
     margin: 5rem 0;
+    padding: 2rem 0 0;
 }
 
 .swiper{
@@ -183,3 +192,30 @@
         padding: 7px 14px 8px 14px;
     }
 } */
+
+.review-form{
+    display: flex;
+    justify-content: center;
+
+    h2{
+        text-align: center;
+        color: $brown-color;
+    }
+    .review-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .MuiRating-root{
+            margin: 0 0 0.8rem;
+        }
+        .comment{
+            border: 1px solid $grey-color;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            outline: none;
+            height: 8rem !important;
+        }
+    }
+}
