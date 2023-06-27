@@ -1,0 +1,150 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+$search-color: #F0EBE8;
+
+
+.navbar{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $white-color;
+    padding: 0.4rem 1.5rem;
+    z-index: 999;
+    width: 100%;
+    border-bottom: 0.75px solid $grey-color;
+
+    .nav-left{
+        display: flex;
+        width: 10%;
+        // justify-content: center;
+
+        .logo {
+            width: 100px;
+        }
+    }
+
+
+    .nav-right{
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        // background: red;
+
+        .nav-up{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            // background: gray;
+            
+            .img-div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                // background: red;
+                .logo-raasiya {
+                        width: 8rem;
+                    }
+            }
+            .input-div{
+                display: flex;
+                align-items: center;
+
+                svg{
+                    position: absolute;
+                    transform: translateX(0.8rem);
+                    width: 1rem;
+                }
+
+                .search {
+                    background-color: $search-color;
+                    color: $black-color;
+                    width: fit-content;
+                    outline: none;
+                    border: none;
+                    padding: 0.5rem 0.5rem 0.5rem 2.2rem;
+                    border-radius: 0.5rem;
+                    font-size: 1rem;
+                    min-width: 18rem;
+                }
+
+                ::placeholder {
+                    color: $brown-color;
+                    opacity: 1;
+                }
+
+                :-ms-input-placeholder {
+                    color: $brown-color;
+                }
+
+                ::-webkit-input-placeholder {
+                    color: $brown-color;
+                }
+                ::-moz-placeholder{
+                    color: $brown-color;
+                }
+                [type="search"]::-webkit-search-cancel-button{
+                    -webkit-appearance: none;
+                    background-color: $brown-color ;
+                    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+                    height: 1.2rem;
+                    width: 1.2rem;
+                }
+            }
+        }
+
+        .nav-down{
+            display: flex;
+            width: 100%;
+            padding: 1rem 0 0;
+
+            ul{
+                list-style: none;
+                display: flex;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+
+                svg{
+                    width: 1.3rem;
+                }
+            }
+
+            .nav-down-1{
+                width: 100%;
+                justify-content: center;
+                font-weight: 500;
+                // background: red;
+                
+                li{
+                    margin: 0 0.5rem;
+                    
+                    a{
+                        color: $brown-color;
+                        text-decoration: none;
+
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+            .nav-down-2{
+                width: fit-content;
+                justify-content: center;
+                // background: yellow;
+                li{
+                    margin: 0 0.5rem;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

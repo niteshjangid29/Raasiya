@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from "react";
+import "./Profile.scss";
 import MetaData from "../layout/MetaData";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,20 +33,20 @@ const Profile = () => {
         <Fragment>
           <MetaData title="Profile" />
 
-          <div className="container">
-            <h1>My Profile</h1>
+          <div className="container profile">
+            <h2>My Profile</h2>
 
             <div>
               <div>
-                <h4>Name</h4>
+                <h4>Name:</h4>
                 {isAuthenticated && <p>{user.name}</p>}
               </div>
               <div>
-                <h4>Email</h4>
+                <h4>Email:</h4>
                 {isAuthenticated && <p>{user.email}</p>}
               </div>
               <div>
-                <h4>Joined On</h4>
+                <h4>Joined On:</h4>
                 {isAuthenticated && (
                   <p>{String(user.createdAt).substr(0, 10)}</p>
                 )}

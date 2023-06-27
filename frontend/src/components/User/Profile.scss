@@ -1,0 +1,54 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+$search-color: #F0EBE8;
+
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0 5rem;
+
+    h2{
+        color: $brown-color;
+        font-size: 1.6rem;
+        font-weight: 500;
+        width: fit-content;
+        padding: 0.5rem 1rem;
+        border-bottom: 1.5px solid $brown-color;
+    }
+
+    >div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        >div{
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+
+            h4{
+                font-size: 1rem;
+                margin: 0;
+                margin-right: 0.6rem;
+            }
+            p{
+                font-size: 1rem;
+                margin: 0;
+            }
+
+            a{
+                text-decoration: none;
+                color: $white-color;
+                background: $black-color;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    }
+}

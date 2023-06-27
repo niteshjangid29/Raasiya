@@ -31,72 +31,75 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Header user={user} />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/product/:id" element={<ProductDetails />} />
-        <Route exact path="/products" element={<Products />} />
-        <Route exact path="/search" element={<Products />} />
-        <Route path="/search/:keyword" element={<Products />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
 
-        <Route
-          exact
-          path="/account"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          exact
-          path="/profile/update"
-          element={
-            <ProtectedRoute>
-              <UpdateProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          exact
-          path="/password/update"
-          element={
-            <ProtectedRoute>
-              <UpdatePassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route exact path="/password/forgot" element={<ForgotPassword />} />
-        <Route
-          exact
-          path="/password/reset/:token"
-          element={<ResetPassword />}
-        />
+      {/* <Header user={user} /> */}
+      <div style={{ marginTop: "7.2rem" }}>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/product/:id" element={<ProductDetails />} />
+          <Route exact path="/products" element={<Products />} />
+          <Route exact path="/search" element={<Products />} />
+          <Route path="/search/:keyword" element={<Products />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
 
-        <Route exact path="/cart" element={<Cart />} />
+          <Route
+            exact
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/profile/update"
+            element={
+              <ProtectedRoute>
+                <UpdateProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/password/update"
+            element={
+              <ProtectedRoute>
+                <UpdatePassword />
+              </ProtectedRoute>
+            }
+          />
+          <Route exact path="/password/forgot" element={<ForgotPassword />} />
+          <Route
+            exact
+            path="/password/reset/:token"
+            element={<ResetPassword />}
+          />
 
-        <Route
-          exact
-          path="/shipping"
-          element={
-            <ProtectedRoute>
-              <Shipping />
-            </ProtectedRoute>
-          }
-        />
+          <Route exact path="/cart" element={<Cart />} />
 
-        <Route
-          exact
-          path="/order/confirm"
-          element={
-            <ProtectedRoute>
-              <ConfirmOrder />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          <Route
+            exact
+            path="/shipping"
+            element={
+              <ProtectedRoute>
+                <Shipping />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            exact
+            path="/order/confirm"
+            element={
+              <ProtectedRoute>
+                <ConfirmOrder />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
       <Footer />
     </BrowserRouter>
   );

@@ -145,6 +145,7 @@ const Header = () => {
               Search
             </Button>
           </Form>
+
           <div className="">
             {/* <Link className="link" to="/cart"> */}
             <button className="btn" type="button" onClick={() => setShow(true)}>
@@ -182,11 +183,6 @@ const Header = () => {
                             decreaseQuantity={decreaseQuantity}
                           />
                         ))}
-                      {/* <HeaderCart />
-                      <HeaderCart />
-                      <HeaderCart />
-                      <HeaderCart />
-                      <HeaderCart /> */}
                     </Offcanvas.Body>
                     <hr />
                     <button className="checkout-btn" onClick={checkOutHandler}>
