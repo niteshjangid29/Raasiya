@@ -4,13 +4,14 @@ $blue-color: #78BAB9;
 $black-color: #333333;
 $yellow-color: #F4D54B;
 $grey-color: #C0C49B;
-
+$white-color: #ffffff;
 
 .product-card{
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: $brown-color;
+    background: $white-color;
     width: 18rem;
     margin: 1rem;
     box-shadow: 0 0 2px rgba(15, 15, 15, 0.26);

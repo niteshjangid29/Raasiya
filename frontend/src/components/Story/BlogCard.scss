@@ -60,4 +60,11 @@ $white-color: #ffffff;
             }
         }
     }
+    &:hover {
+        box-shadow: 0 0 4px rgba(15, 15, 15, 0.26);
+        .blogImage img {
+            transform: scale(1.05);
+            transition: all ease 1.5s;
+        }
+    }
 }

@@ -49,7 +49,7 @@ const ProductDetails = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
-  const [rating, setRating] = useState(4);
+  const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
@@ -72,22 +72,6 @@ const ProductDetails = () => {
     alert.success("Item Added to Cart");
   };
 
-  useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-    if (reviewError) {
-      alert.error(reviewError);
-      dispatch(clearErrors());
-    }
-    if (success) {
-      alert.success("Review Submitted Successfully");
-      dispatch({ type: NEW_REVIEW_RESET });
-    }
-    dispatch(getProductDetails(id));
-  }, [dispatch, id, alert, error, reviewError, success]);
-
   const options = {
     value: product.ratings,
     readOnly: true,
@@ -105,10 +89,29 @@ const ProductDetails = () => {
     myForm.set("comment", comment);
     myForm.set("productId", id);
 
-    dispatch(newReview(myForm));
-
-    setOpen(false);
+    if (comment.length > 0) {
+      dispatch(newReview(myForm));
+      setOpen(false);
+    } else {
+      alert.error("Please write a comment");
+    }
   };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
+    if (success) {
+      alert.success("Review Submitted Successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
+    dispatch(getProductDetails(id));
+  }, [dispatch, id, alert, error, reviewError, success]);
   return (
     <Fragment>
       {loading ? (
@@ -308,9 +311,13 @@ const ProductDetails = () => {
                     cols="30"
                     rows="5"
                     value={comment}
+                    placeholder="Write a Comment..."
                     onChange={(e) => setComment(e.target.value)}
                     className="comment"
                   />
+                  <div className="input-file">
+                    <input type="file" name="reviewImage" />
+                  </div>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} color="secondary">

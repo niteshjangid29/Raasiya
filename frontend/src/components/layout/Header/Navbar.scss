@@ -151,7 +151,8 @@ $search-color: #F0EBE8;
             }
             .nav-down-2{
                 width: fit-content;
-                justify-content: center;
+                justify-content: end;
+                min-width: 18rem;
                 // background: yellow;
                 li{
                     margin: 0 0.5rem;

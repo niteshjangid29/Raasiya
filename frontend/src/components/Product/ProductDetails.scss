@@ -3,7 +3,7 @@ $green-color: #306431;
 $blue-color: #78BAB9;
 $black-color: #333333;
 $yellow-color: #F4D54B;
-$grey-color: #C0C49B;
+$grey-color: #9ea08d;
 $white-color: #ffffff;
 
 .product{
@@ -216,6 +216,28 @@ $white-color: #ffffff;
             font-size: 0.9rem;
             outline: none;
             height: 8rem !important;
+            width: 100%;
+        }
+    }
+    .input-file{
+        display: flex;
+        margin: 1rem 0;
+        width: 100%;
+
+        > input{
+            display: flex;
+            padding: 0;
+        }
+        > input::file-selector-button{
+            cursor: pointer;
+            width: 100%;
+            border: 1px solid $grey-color;
+            border-radius: 0.5rem;
+            background: $white-color;
+            z-index: 2;
+            padding: 0.3rem 0;
+            font-size: 0.9rem;
+            color: $grey-color;
         }
     }
 }

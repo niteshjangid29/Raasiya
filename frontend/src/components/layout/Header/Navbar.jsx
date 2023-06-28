@@ -96,9 +96,6 @@ const Navbar = () => {
               <Link to="/">Collections</Link>
             </li>
             <li>
-              <Link to="/">Stories</Link>
-            </li>
-            <li>
               <Link to="/">Bedroom</Link>
             </li>
             <li>
@@ -108,7 +105,10 @@ const Navbar = () => {
               <Link to="/">Kitchen</Link>
             </li>
             <li>
-              <Link to="/">Sustainability</Link>
+              <Link to="/">Bath</Link>
+            </li>
+            <li>
+              <Link to="/">Stories</Link>
             </li>
           </ul>
           <ul className="nav-down-2">

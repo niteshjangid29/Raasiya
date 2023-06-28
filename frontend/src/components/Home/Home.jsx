@@ -13,7 +13,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { Pagination, Autoplay } from "swiper";
-import BlogCard from "./BlogCard";
+import BlogCard from "../Story/BlogCard";
+import CategoryCard from "./CategoryCard";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -84,6 +85,17 @@ const Home = () => {
                 />
               </SwiperSlide>
             </Swiper>
+
+            <div className="product-categories container">
+              <h2 className="heading">Product Categories</h2>
+              <div className="categoryBox">
+                <CategoryCard />
+                <CategoryCard />
+                <CategoryCard />
+                <CategoryCard />
+              </div>
+            </div>
+
             <div className="best-seller container">
               <h2 className="heading">Best Seller</h2>
 
@@ -100,7 +112,7 @@ const Home = () => {
             </div>
 
             <div className="blogs container">
-              <h2 className="heading">Blogs</h2>
+              <h2 className="heading">Stories</h2>
               <div className="blogBox">
                 <BlogCard />
                 <BlogCard />
@@ -108,7 +120,7 @@ const Home = () => {
                 <BlogCard />
               </div>
               <Link to="/blogs" className="myBtn">
-                View All Blogs
+                View All Stories
               </Link>
               {/* <Swiper
                 slidesPerView={4}
