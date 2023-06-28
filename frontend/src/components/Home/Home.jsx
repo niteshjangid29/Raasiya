@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { Pagination, Autoplay } from "swiper";
+import BlogCard from "./BlogCard";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const Home = () => {
               pagination={{
                 clickable: true,
               }}
+              loop={true}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -95,6 +97,43 @@ const Home = () => {
               <Link to="/products" className="myBtn">
                 View All Products
               </Link>
+            </div>
+
+            <div className="blogs container">
+              <h2 className="heading">Blogs</h2>
+              <div className="blogBox">
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+              </div>
+              <Link to="/blogs" className="myBtn">
+                View All Blogs
+              </Link>
+              {/* <Swiper
+                slidesPerView={4}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination]}
+                className="blogSwiper"
+              >
+                <SwiperSlide>
+                  <BlogCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <BlogCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <BlogCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <BlogCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <BlogCard />
+                </SwiperSlide>
+              </Swiper> */}
             </div>
           </div>
         </Fragment>

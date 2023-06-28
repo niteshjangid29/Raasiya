@@ -11,19 +11,23 @@ const ProductCard = ({ product }) => {
   };
   return (
     <Link className="product-card" to={`/product/${product._id}`}>
-      <img src={product.images[0].url} alt={product.name} />
       <div>
-        <h2>{product.name}</h2>
-        <div className="productCard-rating">
-          <Rating {...options} />
-          <span className="mt-1">
-            ({product.numberOfReviews}{" "}
-            {product.numberOfReviews > 1 ? "Reviews" : "Review"})
+        <div className="product-card-image">
+          <img src={product.images[0].url} alt={product.name} />
+        </div>
+        <div className="product-card-content">
+          <h2>{product.name}</h2>
+          <div className="productCard-rating">
+            <Rating {...options} />
+            <span className="mt-1">
+              ({product.numberOfReviews}{" "}
+              {product.numberOfReviews > 1 ? "Reviews" : "Review"})
+            </span>
+          </div>
+          <span>
+            <strong>{`Rs. ${product.price}`}</strong>
           </span>
         </div>
-        <span>
-          <strong>{`Rs. ${product.price}`}</strong>
-        </span>
       </div>
     </Link>
   );

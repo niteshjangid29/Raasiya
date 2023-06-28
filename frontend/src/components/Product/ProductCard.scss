@@ -13,15 +13,17 @@ $grey-color: #C0C49B;
     color: $brown-color;
     width: 18rem;
     margin: 1rem;
-    overflow: hidden;
-    transition: all 0.5s;
     box-shadow: 0 0 2px rgba(15, 15, 15, 0.26);
-    // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 
-    img{
-        width: 100%;
+    .product-card-image{
+        aspect-ratio: 1;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: 100%;
+        }
     }
-    &>div{
+    .product-card-content{
         padding: 1rem 0.7rem;
     }
     h2{
@@ -46,9 +48,9 @@ $grey-color: #C0C49B;
 
     &:hover {
         box-shadow: 0 0 4px rgba(15, 15, 15, 0.26);
-        > img{
-            transform: scale(1.03);
-            transition: all ease-in-out 1s;
+        .product-card-image img{
+            transform: scale(1.05);
+            transition: all ease 1.5s;
         }
     }
 }

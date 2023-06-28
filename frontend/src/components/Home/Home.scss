@@ -11,6 +11,22 @@ $white-color: #ffffff;
     display: flex;
     flex-direction: column;
 
+
+    .homeSwiper {
+        .swiper-pagination-bullet {
+            background: none;
+            border: 2px solid $white-color;
+            opacity: 1;
+            width: 0.7rem;
+            height: 0.7rem;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: $white-color;
+            border: 2px solid $white-color;
+        }
+    }
+
     .best-seller{
         display: flex;
         flex-direction: column;
@@ -28,19 +44,45 @@ $white-color: #ffffff;
         }
     }
 
-    .homeSwiper{
-        .swiper-pagination-bullet{
-            background: none;
-            border: 2px solid $white-color;
-            opacity: 1;
-            width: 0.7rem;
-            height: 0.7rem;
+    .blogs{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 2rem;
+
+        .blogBox{
+            display: flex;
+            width: 95vw;
+            margin: 1rem auto;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
         }
-        .swiper-pagination-bullet-active{
-            background: $white-color;
-            border: 2px solid $white-color;
+
+        .blogSwiper{
+            display: flex;
+            padding: 2rem 0 3rem;
+    
+            .swiper-slide{
+                display: flex;
+                justify-content: center;
+            }
+    
+            .swiper-pagination-bullet {
+                background: none;
+                border: 2px solid $brown-color;
+                opacity: 1;
+                width: 0.7rem;
+                height: 0.7rem;
+            }
+    
+            .swiper-pagination-bullet-active {
+                background: $brown-color;
+                border: 2px solid $brown-color;
+            }
         }
     }
+
 }
 
 .myBtn{
