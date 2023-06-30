@@ -6,11 +6,20 @@ const ProtectedRoute = ({ children }) => {
   const { loading, isAuthenticated } = useSelector((state) => state.user);
   return (
     <Fragment>
-      {!loading && isAuthenticated ? (
+      {!loading && (
+        <Fragment>
+          {isAuthenticated === false ? (
+            <Navigate to="/login" />
+          ) : (
+            <Fragment>{children}</Fragment>
+          )}
+        </Fragment>
+      )}
+      {/* {!loading && isAuthenticated ? (
         <Fragment>{children}</Fragment>
       ) : (
         <Navigate to="/login" />
-      )}
+      )} */}
     </Fragment>
   );
 };

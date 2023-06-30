@@ -3,14 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductDetails from "./components/Product/ProductDetails";
 import Home from "./components/Home/Home";
-import Header from "./components/layout/Header/Header";
+// import Header from "./components/layout/Header/Header";
 import Products from "./components/Products/Products";
 import Register from "./components/User/Register";
 import Login from "./components/User/Login";
 import store from "./store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadUser } from "./actions/userActions";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Profile from "./components/User/Profile";
 import ProtectedRoute from "./components/Routes/ProtectedRoute";
 import UpdateProfile from "./components/User/UpdateProfile";
@@ -22,11 +22,24 @@ import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Navbar from "./components/layout/Header/Navbar";
 import Footer from "./components/layout/Footer/Footer";
+import axios from "axios";
+import Payment from "./components/Cart/Payment";
+import OrderSuccess from "./components/Cart/OrderSuccess";
+import MyOrders from "./components/Order/MyOrders";
 
 function App() {
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
+  const [razorpayApiKey, setRazorpayApiKey] = useState("");
+
+  async function getRazorpayApiKey() {
+    const { data } = await axios.get("/api/v1/razorpayapikey");
+
+    setRazorpayApiKey(data.razorpayApiKey);
+  }
   useEffect(() => {
     store.dispatch(loadUser());
+
+    getRazorpayApiKey();
   }, []);
   return (
     <BrowserRouter>
@@ -95,6 +108,34 @@ function App() {
             element={
               <ProtectedRoute>
                 <ConfirmOrder />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            exact
+            path="/process/payment"
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/success"
+            element={
+              <ProtectedRoute>
+                <OrderSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <MyOrders />
               </ProtectedRoute>
             }
           />
