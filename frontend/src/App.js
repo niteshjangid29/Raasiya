@@ -26,6 +26,7 @@ import axios from "axios";
 import Payment from "./components/Cart/Payment";
 import OrderSuccess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
+import OrderDetails from "./components/Order/OrderDetails";
 
 function App() {
   // const { user } = useSelector((state) => state.user);
@@ -136,6 +137,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/order/:id"
+            element={
+              <ProtectedRoute>
+                <OrderDetails />
               </ProtectedRoute>
             }
           />
