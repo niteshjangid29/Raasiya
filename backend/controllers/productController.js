@@ -32,6 +32,29 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get All Products Categories
+exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find();
+  const categories = [];
+
+  for (const product of products) {
+    if (!categories.includes(product.category)) {
+      categories.push(product.category);
+    }
+  }
+  const categoriesCount = await categories.length;
+
+  if (!categories) {
+    return next(new ErrorHandler("Category not found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    categories,
+    categoriesCount,
+  });
+});
+
 // Update Product --Admin SuperAdmin
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = Product.findById(req.params.id);
