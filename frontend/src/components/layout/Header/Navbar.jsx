@@ -57,10 +57,12 @@ const Navbar = () => {
     isAuthenticated ? navigate("/cart") : navigate("/login");
   }
   function dashboard() {
+    setAccountMenu(null);
     isAuthenticated ? navigate("/admin/dashboard") : navigate("/login");
   }
   function superdashboard() {
-    isAuthenticated ? navigate("/admin/superdashboard") : navigate("/login");
+    setAccountMenu(null);
+    isAuthenticated ? navigate("/admin/dashboard") : navigate("/login");
   }
   function logOutUser() {
     setAccountMenu(null);

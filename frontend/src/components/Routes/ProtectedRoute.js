@@ -40,10 +40,14 @@ const ProtectedRoute = ({ isAdmin, component: Component, ...routeProps }) => {
   }
 
   // if (isAuthenticated === true) {
-  if (loading === false && isAdmin === true && user.role !== "admin") {
+
+  // if (loading === false && isAdmin === true && user.role !== "admin") {
+  //   return <Navigate to="/login" />;
+  // }
+  // }
+  if (loading === false && isAdmin === true && user.role === "user") {
     return <Navigate to="/login" />;
   }
-  // }
 
   return (
     <Fragment>

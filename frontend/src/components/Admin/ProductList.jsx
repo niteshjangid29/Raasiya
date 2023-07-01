@@ -2,19 +2,33 @@ import React, { Fragment, useEffect } from "react";
 import "./ProductList.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Button } from "@mui/material";
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 import { DataGrid } from "@mui/x-data-grid";
-import { clearErrors, getAdminProduct } from "../../actions/productActions";
+import {
+  clearErrors,
+  deleteProduct,
+  getAdminProduct,
+} from "../../actions/productActions";
+import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate();
 
   const { error, products } = useSelector((state) => state.products);
+
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -41,14 +55,14 @@ const ProductList = () => {
       flex: 0.3,
       sortable: false,
       renderCell: (params) => {
-        const cellValue = params.id;
+        const product_id = params.id;
         return (
           <Fragment>
-            <Link to={`/admin/product/${cellValue}`}>
+            <Link to={`/admin/product/${product_id}`}>
               <MdEdit />
             </Link>
 
-            <Button>
+            <Button onClick={() => deleteProductHandler(product_id)}>
               <MdDelete />
             </Button>
           </Fragment>
@@ -75,8 +89,19 @@ const ProductList = () => {
       dispatch(clearErrors());
     }
 
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      alert.success("Product Deleted Successfully");
+      navigate("/admin/dashboard");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
+
     dispatch(getAdminProduct());
-  }, [dispatch, error, alert]);
+  }, [dispatch, error, alert, isDeleted, navigate, deleteError]);
   return (
     <Fragment>
       <MetaData title="All Products - Admin" />
