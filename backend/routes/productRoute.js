@@ -9,11 +9,19 @@ const {
   getProductReviews,
   deleteReview,
   getAllCategories,
+  getAdminProducts,
 } = require("../controllers/productController");
 const router = express.Router();
 const { isAuthenticatedUser, authorizedRoles } = require("../middleware/auth");
 
 router.route("/products").get(getAllProducts);
+router
+  .route("/admin/products")
+  .get(
+    isAuthenticatedUser,
+    authorizedRoles(["admin", "superadmin"]),
+    getAdminProducts
+  );
 router
   .route("/admin/product/new")
   .post(

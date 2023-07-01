@@ -35,6 +35,9 @@ const Login = () => {
 
     if (isAuthenticated) {
       navigate(`/${redirect ? redirect : "account"}`);
+      // if (redirect) {
+      //   navigate(`/${redirect}`);
+      // }
     }
   }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
 

@@ -9,16 +9,23 @@ $search-color: #F0EBE8;
 
 
 .navbar{
-    display: flex;
-    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
-    background: $white-color;
-    padding: 0.4rem 1.5rem;
     z-index: 999;
-    width: 100%;
-    border-bottom: 0.75px solid $grey-color;
+    background: $white-color;
+    padding: 0;
+    
+    .navbox{
+        display: flex;
+        z-index: 999;
+        align-items: center;
+        width: 100vw;
+        padding: 0.4rem 1.5rem;
+        background: $white-color;
+        position: relative;
+        border-bottom: 0.75px solid $grey-color;
+    }
 
     .nav-left{
         display: flex;
@@ -276,4 +283,10 @@ $search-color: #F0EBE8;
         color: $white-color;
         padding: 0.5rem 1.5rem;
     }
+}
+
+
+.account-menu .MuiPaper-root {
+    margin-top: 1rem;
+    border-top: 2px solid $brown-color;
 }

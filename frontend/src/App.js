@@ -27,6 +27,9 @@ import Payment from "./components/Cart/Payment";
 import OrderSuccess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
 import OrderDetails from "./components/Order/OrderDetails";
+import Dashboard from "./components/Admin/Dashboard";
+import ProductList from "./components/Admin/ProductList";
+import NewProduct from "./components/Admin/NewProduct";
 
 function App() {
   // const { user } = useSelector((state) => state.user);
@@ -57,7 +60,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
 
-          <Route
+          {/* <Route
             exact
             path="/account"
             element={
@@ -65,24 +68,21 @@ function App() {
                 <Profile />
               </ProtectedRoute>
             }
+          /> */}
+          <Route
+            exact
+            path="/account"
+            element={<ProtectedRoute component={Profile} />}
           />
           <Route
             exact
             path="/profile/update"
-            element={
-              <ProtectedRoute>
-                <UpdateProfile />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={UpdateProfile} />}
           />
           <Route
             exact
             path="/password/update"
-            element={
-              <ProtectedRoute>
-                <UpdatePassword />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={UpdatePassword} />}
           />
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
           <Route
@@ -96,58 +96,49 @@ function App() {
           <Route
             exact
             path="/shipping"
-            element={
-              <ProtectedRoute>
-                <Shipping />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={Shipping} />}
           />
 
           <Route
             exact
             path="/order/confirm"
-            element={
-              <ProtectedRoute>
-                <ConfirmOrder />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={ConfirmOrder} />}
           />
 
           <Route
             exact
             path="/process/payment"
-            element={
-              <ProtectedRoute>
-                <Payment />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={Payment} />}
           />
           <Route
             exact
             path="/success"
-            element={
-              <ProtectedRoute>
-                <OrderSuccess />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={OrderSuccess} />}
           />
           <Route
             exact
             path="/orders"
-            element={
-              <ProtectedRoute>
-                <MyOrders />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={MyOrders} />}
           />
           <Route
             exact
             path="/order/:id"
-            element={
-              <ProtectedRoute>
-                <OrderDetails />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute component={OrderDetails} />}
+          />
+          <Route
+            exact
+            path="/admin/dashboard"
+            element={<ProtectedRoute isAdmin={true} component={Dashboard} />}
+          />
+          <Route
+            exact
+            path="/admin/products"
+            element={<ProtectedRoute isAdmin={true} component={ProductList} />}
+          />
+          <Route
+            exact
+            path="/admin/product"
+            element={<ProtectedRoute isAdmin={true} component={NewProduct} />}
           />
         </Routes>
       </div>
