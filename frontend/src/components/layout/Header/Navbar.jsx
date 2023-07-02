@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import "./Navbar.scss";
 import Logo from "../../../images/Logo.png";
 import LogoRaasiya from "../../../images/Raasiya.png";
@@ -13,7 +13,7 @@ import {
   removeItemFromCart,
 } from "../../../actions/cartActions";
 import { Menu, MenuItem } from "@mui/material";
-import { clearErrors, logout } from "../../../actions/userActions";
+import { logout } from "../../../actions/userActions";
 import { useAlert } from "react-alert";
 
 const Navbar = () => {
@@ -26,7 +26,7 @@ const Navbar = () => {
   const alert = useAlert();
 
   const { cartItems } = useSelector((state) => state.cart);
-  const { user, isAuthenticated, error } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
   const options = [
     { name: "My Account", func: account },

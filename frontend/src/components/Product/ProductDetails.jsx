@@ -146,6 +146,10 @@ const ProductDetails = () => {
                       <SwiperSlide key={i}>
                         <div className="swiper-zoom-container">
                           <img
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                            }}
                             key={i}
                             src={item.url}
                             alt={`${i} Slide`}

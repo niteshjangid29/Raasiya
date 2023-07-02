@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./NewProduct.scss";
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 import {
@@ -12,16 +11,28 @@ import {
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { clearErrors, createProduct } from "../../actions/productActions";
-import { useNavigate } from "react-router-dom";
-import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+import {
+  clearErrors,
+  updateProduct,
+  getProductDetails,
+} from "../../actions/productActions";
+import { useNavigate, useParams } from "react-router-dom";
+import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 
-const NewProduct = () => {
+const UpdateProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { id: productId } = useParams();
+
+  const { error, product } = useSelector((state) => state.productDetails);
+
+  const {
+    loading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.product);
 
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
@@ -34,6 +45,7 @@ const NewProduct = () => {
   const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
+  const [oldImages, setOldImages] = useState([]);
   const categories = [
     "Laptop",
     "Footwear",
@@ -42,9 +54,10 @@ const NewProduct = () => {
     "Attire",
     "Camera",
     "SmartPhones",
+    "Bed Linen",
   ];
 
-  const createProductSubmitHandler = (e) => {
+  const updateProductSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -63,14 +76,15 @@ const NewProduct = () => {
       myForm.append("images", image);
     });
 
-    dispatch(createProduct(myForm));
+    dispatch(updateProduct(productId, myForm));
   };
 
-  const createProductImagesChange = (e) => {
+  const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
 
     setImages([]);
     setImagesPreview([]);
+    setOldImages([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -87,21 +101,50 @@ const NewProduct = () => {
   };
 
   useEffect(() => {
+    if (product && product._id !== productId) {
+      dispatch(getProductDetails(productId));
+    } else {
+      setName(product.name);
+      setDetails(product.details);
+      setDescription(product.description);
+      setStory(product.story);
+      setSku(product.sku);
+      setPrice(product.price);
+      setCategory(product.category);
+      setCollections(product.collections);
+      setStock(product.Stock);
+      setOldImages(product.images);
+    }
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
-    if (success) {
-      alert.success("Product Created Successfully");
-      navigate("/admin/dashboard");
-
-      dispatch({ type: NEW_PRODUCT_RESET });
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
     }
-  }, [alert, error, dispatch, success, navigate]);
+
+    if (isUpdated) {
+      alert.success("Product Updated Successfully");
+      navigate("/admin/products");
+
+      dispatch({ type: UPDATE_PRODUCT_RESET });
+    }
+  }, [
+    alert,
+    error,
+    dispatch,
+    isUpdated,
+    navigate,
+    productId,
+    product,
+    updateError,
+  ]);
   return (
     <Fragment>
-      <MetaData title="Create Product" />
+      <MetaData title="Update Product" />
       <div className="dashboard">
         <Sidebar />
         <div className="newProductContainer">
@@ -109,9 +152,9 @@ const NewProduct = () => {
             action=""
             className="createProductForm"
             encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
+            onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
 
             <div>
               <MdSpellcheck />
@@ -129,7 +172,7 @@ const NewProduct = () => {
                 type="number"
                 placeholder="Price"
                 required
-                // value={price}
+                value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
             </div>
@@ -190,7 +233,10 @@ const NewProduct = () => {
 
             <div>
               <MdAccountTree />
-              <select onChange={(e) => setCategory(e.target.value)}>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
                 <option value="">Choose Category</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
@@ -206,6 +252,7 @@ const NewProduct = () => {
                 type="number"
                 placeholder="Stock"
                 required
+                value={Stock}
                 onChange={(e) => setStock(e.target.value)}
               />
             </div>
@@ -216,8 +263,15 @@ const NewProduct = () => {
                 name="avatar"
                 accept="image/*"
                 multiple
-                onChange={createProductImagesChange}
+                onChange={updateProductImagesChange}
               />
+            </div>
+
+            <div id="createProductFormImage">
+              {oldImages &&
+                oldImages.map((image, index) => (
+                  <img key={index} src={image.url} alt="Product Preview" />
+                ))}
             </div>
 
             <div id="createProductFormImage">
@@ -231,7 +285,7 @@ const NewProduct = () => {
               type="submit"
               disabled={loading ? true : false}
             >
-              Create
+              Update
             </Button>
           </form>
         </div>
@@ -240,4 +294,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default UpdateProduct;

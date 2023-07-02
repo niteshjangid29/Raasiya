@@ -30,6 +30,9 @@ import OrderDetails from "./components/Order/OrderDetails";
 import Dashboard from "./components/Admin/Dashboard";
 import ProductList from "./components/Admin/ProductList";
 import NewProduct from "./components/Admin/NewProduct";
+import UpdateProduct from "./components/Admin/UpdateProduct";
+import OrderList from "./components/Admin/OrderList";
+import ProcessOrder from "./components/Admin/ProcessOrder";
 
 function App() {
   // const { user } = useSelector((state) => state.user);
@@ -139,6 +142,23 @@ function App() {
             exact
             path="/admin/product"
             element={<ProtectedRoute isAdmin={true} component={NewProduct} />}
+          />
+          <Route
+            exact
+            path="/admin/product/:id"
+            element={
+              <ProtectedRoute isAdmin={true} component={UpdateProduct} />
+            }
+          />
+          <Route
+            exact
+            path="/admin/orders"
+            element={<ProtectedRoute isAdmin={true} component={OrderList} />}
+          />
+          <Route
+            exact
+            path="/admin/order/:id"
+            element={<ProtectedRoute isAdmin={true} component={ProcessOrder} />}
           />
         </Routes>
       </div>

@@ -9,40 +9,47 @@ import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import {
+  deleteOrder,
+  getAllOrders,
   clearErrors,
-  deleteProduct,
-  getAdminProduct,
-} from "../../actions/productActions";
-import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
+} from "../../actions/orderActions";
+import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
-const ProductList = () => {
+const OrderList = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { error, products } = useSelector((state) => state.products);
+  const { error, orders } = useSelector((state) => state.allOrders);
 
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.product
-  );
+  const { error: deleteError, isDeleted } = useSelector((state) => state.order);
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
 
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
-    { field: "name", headerName: "Name", minWidth: 350, flex: 1 },
+    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
     {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
+      field: "status",
+      headerName: "Status",
       minWidth: 150,
-      flex: 0.3,
+      flex: 0.5,
+      cellClassName: (params) => {
+        const status = params.value;
+        return status === "Processing" ? "greenColor" : "redColor";
+      },
     },
     {
-      field: "price",
-      headerName: "Price",
+      field: "itemsQty",
+      headerName: "Items Qty",
+      type: "number",
+      minWidth: 150,
+      flex: 0.4,
+    },
+    {
+      field: "amount",
+      headerName: "Amount",
       type: "number",
       minWidth: 270,
       flex: 0.5,
@@ -55,14 +62,14 @@ const ProductList = () => {
       flex: 0.3,
       sortable: false,
       renderCell: (params) => {
-        const product_id = params.id;
+        const order_id = params.id;
         return (
           <Fragment>
-            <Link to={`/admin/product/${product_id}`}>
+            <Link to={`/admin/order/${order_id}`}>
               <MdEdit />
             </Link>
 
-            <Button onClick={() => deleteProductHandler(product_id)}>
+            <Button onClick={() => deleteOrderHandler(order_id)}>
               <MdDelete />
             </Button>
           </Fragment>
@@ -73,13 +80,13 @@ const ProductList = () => {
 
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  orders &&
+    orders.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.Stock,
-        price: item.price,
-        name: item.name,
+        itemsQty: item.orderItems.length,
+        amount: item.totalPrice,
+        status: item.orderStatus,
       });
     });
 
@@ -95,22 +102,22 @@ const ProductList = () => {
     }
 
     if (isDeleted) {
-      alert.success("Product Deleted Successfully");
-      navigate("/admin/products");
-      dispatch({ type: DELETE_PRODUCT_RESET });
+      alert.success("Order Deleted Successfully");
+      navigate("/admin/orders");
+      dispatch({ type: DELETE_ORDER_RESET });
     }
 
-    dispatch(getAdminProduct());
+    dispatch(getAllOrders());
   }, [dispatch, error, alert, isDeleted, navigate, deleteError]);
   return (
     <Fragment>
-      <MetaData title="All Products - Admin" />
+      <MetaData title="All Orders - Admin" />
 
       <div className="dashboard">
         <Sidebar />
 
         <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
+          <h1 id="productListHeading">ALL ORDERS</h1>
 
           <DataGrid
             rows={rows}
@@ -129,4 +136,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default OrderList;

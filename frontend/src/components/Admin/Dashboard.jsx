@@ -18,6 +18,7 @@ import {
 import { Doughnut, Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProduct } from "../../actions/productActions";
+import { getAllOrders } from "../../actions/orderActions";
 
 ChartJS.register(
   CategoryScale,
@@ -32,7 +33,10 @@ ChartJS.register(
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
   const { products } = useSelector((state) => state.products);
+  const { orders } = useSelector((state) => state.allOrders);
+
   let outOfStock = 0;
 
   products &&
@@ -67,6 +71,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getAdminProduct());
+    dispatch(getAllOrders());
   }, [dispatch]);
   return (
     <Fragment>
@@ -88,7 +93,7 @@ const Dashboard = () => {
               </Link>
               <Link to="/admin/orders">
                 <p>Orders</p>
-                {/* <p>{orders && orders.length}</p> */}
+                <p>{orders && orders.length}</p>
               </Link>
               <Link to="/admin/users">
                 <p>Users</p>

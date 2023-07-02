@@ -1,8 +1,8 @@
 .confirmOrderPage {
-    height: 100vh;
     background-color: white;
     display: grid;
     grid-template-columns: 6fr 3fr;
+    height: 100%;
 }
 
 .confirmOrderPage>div:last-child {
