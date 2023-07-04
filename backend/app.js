@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
-// const cors = require("cors");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
@@ -11,7 +11,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
-// app.use(cors());
+app.use(cors());
 
 // Route Imports
 const product = require("./routes/productRoute");
