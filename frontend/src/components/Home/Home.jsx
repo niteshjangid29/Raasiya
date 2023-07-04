@@ -57,31 +57,31 @@ const Home = () => {
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/IWL_Website_Desktop_Banner_1800x.jpg?v=1686572875"
-                  alt=""
+                  alt="Image 1"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/this_is_me_website_banner__after_15_days_1800x.png?v=1686483623"
-                  alt=""
+                  alt="Image 2"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/clearancesale_websitebanner_1800x.png?v=1674925496"
-                  alt=""
+                  alt="Image 3"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/IMG_5480_1800x.jpg?v=1647280779"
-                  alt=""
+                  alt="Image 4"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/Suta-Bag_1800x.jpg?v=1647256422"
-                  alt=""
+                  alt="Image 5"
                 />
               </SwiperSlide>
             </Swiper>

@@ -33,6 +33,10 @@ import NewProduct from "./components/Admin/NewProduct";
 import UpdateProduct from "./components/Admin/UpdateProduct";
 import OrderList from "./components/Admin/OrderList";
 import ProcessOrder from "./components/Admin/ProcessOrder";
+import UsersList from "./components/Admin/UsersList";
+import UpdateUser from "./components/Admin/UpdateUser";
+import ProductReview from "./components/Admin/ProductReview";
+import NotFound from "./components/layout/Not Found/NotFound";
 
 function App() {
   // const { user } = useSelector((state) => state.user);
@@ -48,6 +52,8 @@ function App() {
 
     getRazorpayApiKey();
   }, []);
+
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <BrowserRouter>
       <Navbar />
@@ -160,6 +166,25 @@ function App() {
             path="/admin/order/:id"
             element={<ProtectedRoute isAdmin={true} component={ProcessOrder} />}
           />
+          <Route
+            exact
+            path="/admin/users"
+            element={<ProtectedRoute isAdmin={true} component={UsersList} />}
+          />
+          <Route
+            exact
+            path="/admin/user/:id"
+            element={<ProtectedRoute isAdmin={true} component={UpdateUser} />}
+          />
+          <Route
+            exact
+            path="/admin/reviews"
+            element={
+              <ProtectedRoute isAdmin={true} component={ProductReview} />
+            }
+          />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />

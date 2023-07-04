@@ -19,6 +19,7 @@ import { Doughnut, Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminProduct } from "../../actions/productActions";
 import { getAllOrders } from "../../actions/orderActions";
+import { getAllUsers } from "../../actions/userActions";
 
 ChartJS.register(
   CategoryScale,
@@ -36,6 +37,7 @@ const Dashboard = () => {
 
   const { products } = useSelector((state) => state.products);
   const { orders } = useSelector((state) => state.allOrders);
+  const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
 
@@ -46,6 +48,12 @@ const Dashboard = () => {
       }
     });
 
+  let totalAmount = 0;
+  orders &&
+    orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
+
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -53,7 +61,7 @@ const Dashboard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197,72,49)"],
-        data: [0, 4000],
+        data: [0, totalAmount],
       },
     ],
   };
@@ -72,6 +80,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getAdminProduct());
     dispatch(getAllOrders());
+    dispatch(getAllUsers());
   }, [dispatch]);
   return (
     <Fragment>
@@ -84,7 +93,9 @@ const Dashboard = () => {
 
           <div className="dashboardSummary">
             <div>
-              <p>{/* Total Amount <br /> ₹{totalAmount} */}</p>
+              <p>
+                Total Amount <br /> ₹{totalAmount}
+              </p>
             </div>
             <div className="dashboardSummaryBox2">
               <Link to="/admin/products">
@@ -97,7 +108,7 @@ const Dashboard = () => {
               </Link>
               <Link to="/admin/users">
                 <p>Users</p>
-                {/* <p>{users && users.length}</p> */}
+                <p>{users && users.length}</p>
               </Link>
             </div>
           </div>

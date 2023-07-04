@@ -37,9 +37,11 @@ router
     updateProduct
   )
   .delete(isAuthenticatedUser, authorizedRoles(["superadmin"]), deleteProduct);
+
 router.route("/product/:id").get(getSingleProduct);
 
 router.route("/review").put(isAuthenticatedUser, createProductReview);
+
 router
   .route("/reviews")
   .get(getProductReviews)
