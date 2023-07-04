@@ -20,11 +20,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { loading, error, products, productsCount } = useSelector(
-    (state) => state.products
-  );
+  const { loading, error, products } = useSelector((state) => state.products);
 
-  const bestSellerProducts = products.slice(0, 4);
+  let bestSellerProducts = 0;
+
+  products && (bestSellerProducts = products.slice(0, 4));
 
   useEffect(() => {
     if (error) {
@@ -57,31 +57,31 @@ const Home = () => {
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/IWL_Website_Desktop_Banner_1800x.jpg?v=1686572875"
-                  alt="Image 1"
+                  alt="Images 1"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/this_is_me_website_banner__after_15_days_1800x.png?v=1686483623"
-                  alt="Image 2"
+                  alt="Images 2"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/clearancesale_websitebanner_1800x.png?v=1674925496"
-                  alt="Image 3"
+                  alt="Images 3"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/IMG_5480_1800x.jpg?v=1647280779"
-                  alt="Image 4"
+                  alt="Images 4"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
                   src="https://suta.in/cdn/shop/files/Suta-Bag_1800x.jpg?v=1647256422"
-                  alt="Image 5"
+                  alt="Images 5"
                 />
               </SwiperSlide>
             </Swiper>

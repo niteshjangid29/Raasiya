@@ -8,7 +8,7 @@ import Products from "./components/Products/Products";
 import Register from "./components/User/Register";
 import Login from "./components/User/Login";
 import store from "./store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { loadUser } from "./actions/userActions";
 // import { useSelector } from "react-redux";
 import Profile from "./components/User/Profile";
@@ -22,7 +22,6 @@ import Shipping from "./components/Cart/Shipping";
 import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Navbar from "./components/layout/Header/Navbar";
 import Footer from "./components/layout/Footer/Footer";
-import axios from "axios";
 import Payment from "./components/Cart/Payment";
 import OrderSuccess from "./components/Cart/OrderSuccess";
 import MyOrders from "./components/Order/MyOrders";
@@ -40,17 +39,17 @@ import NotFound from "./components/layout/Not Found/NotFound";
 
 function App() {
   // const { user } = useSelector((state) => state.user);
-  const [razorpayApiKey, setRazorpayApiKey] = useState("");
+  // const [razorpayApiKey, setRazorpayApiKey] = useState("");
 
-  async function getRazorpayApiKey() {
-    const { data } = await axios.get("/api/v1/razorpayapikey");
+  // async function getRazorpayApiKey() {
+  //   const { data } = await axios.get("/api/v1/razorpayapikey");
 
-    setRazorpayApiKey(data.razorpayApiKey);
-  }
+  //   setRazorpayApiKey(data.razorpayApiKey);
+  // }
   useEffect(() => {
     store.dispatch(loadUser());
 
-    getRazorpayApiKey();
+    // getRazorpayApiKey();
   }, []);
 
   window.addEventListener("contextmenu", (e) => e.preventDefault());

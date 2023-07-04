@@ -35,7 +35,7 @@ const Navbar = () => {
     { name: "My Logout", func: logOutUser },
   ];
 
-  if (isAuthenticated) {
+  if (isAuthenticated === true) {
     if (user.role === "admin") {
       options.unshift({ name: "Dashboard", func: dashboard });
     }
@@ -46,23 +46,27 @@ const Navbar = () => {
 
   function account() {
     setAccountMenu(null);
-    isAuthenticated ? navigate("/account") : navigate("/login");
+    isAuthenticated === true ? navigate("/account") : navigate("/login");
   }
   function orders() {
     setAccountMenu(null);
-    isAuthenticated ? navigate("/orders") : navigate("/login");
+    isAuthenticated === true ? navigate("/orders") : navigate("/login");
   }
   function cart() {
     setAccountMenu(null);
-    isAuthenticated ? navigate("/cart") : navigate("/login");
+    isAuthenticated === true ? navigate("/cart") : navigate("/login");
   }
   function dashboard() {
     setAccountMenu(null);
-    isAuthenticated ? navigate("/admin/dashboard") : navigate("/login");
+    isAuthenticated === true
+      ? navigate("/admin/dashboard")
+      : navigate("/login");
   }
   function superdashboard() {
     setAccountMenu(null);
-    isAuthenticated ? navigate("/admin/dashboard") : navigate("/login");
+    isAuthenticated === true
+      ? navigate("/admin/dashboard")
+      : navigate("/login");
   }
   function logOutUser() {
     setAccountMenu(null);

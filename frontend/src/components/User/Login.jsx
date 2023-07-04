@@ -23,7 +23,7 @@ const Login = () => {
   const loginSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(login(loginEmail, loginPassword));
+    dispatch(login(loginEmail.toLowerCase(), loginPassword));
   };
 
   const redirect = searchParams.get("redirect");

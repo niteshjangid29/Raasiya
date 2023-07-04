@@ -25,7 +25,7 @@ const Register = () => {
     const myForm = new FormData();
 
     myForm.set("name", name);
-    myForm.set("email", email);
+    myForm.set("email", email.toLowerCase());
     myForm.set("password", password);
 
     dispatch(register(myForm));
