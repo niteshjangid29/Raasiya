@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const OrderSuccess = () => {
+  localStorage.removeItem("cartItems");
   return (
     <div className="orderSuccess">
       <FaCheckCircle />

@@ -54,7 +54,7 @@ const Navbar = () => {
   }
   function cart() {
     setAccountMenu(null);
-    isAuthenticated === true ? navigate("/cart") : navigate("/login");
+    isAuthenticated === true ? navigate("/checkout/cart") : navigate("/login");
   }
   function dashboard() {
     setAccountMenu(null);
@@ -99,7 +99,8 @@ const Navbar = () => {
     dispatch(removeItemFromCart(id));
   };
   const checkOutHandler = () => {
-    navigate("/login?redirect=shipping");
+    // navigate("/login?redirect=shipping");
+    navigate("/login?redirect=checkout/cart");
     setShow(false);
   };
   const searchSubmitHandler = (e) => {

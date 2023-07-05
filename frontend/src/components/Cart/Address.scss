@@ -1,0 +1,109 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+$search-color: #F0EBE8;
+
+.cartAddress {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 65rem;
+    margin: auto;
+    padding: 2rem 0;
+
+    .cartAddressLeft{
+        flex: 5;
+        display: flex;
+        flex-direction: column;
+        // background: red;
+        border-right: 1px solid $grey-color;
+        padding: 1rem;
+
+        h3{
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: $brown-color;
+            text-transform: uppercase;
+        }
+
+        .shippingForm{
+            >div{
+                margin: 0.5rem 0;
+            }
+        }
+
+        .addressCard{
+            border: 1px solid $grey-color;
+            border-radius: 0.5rem;
+            padding: 0.6rem;
+            
+            >div{
+                display: flex;
+                padding: 0.3rem 0;
+    
+                p{
+                    margin: 0;
+                    margin-right: 0.5rem;
+
+                    strong{
+                        font-weight: 500;
+                    }
+                }
+                span{
+                    font-weight: 600;
+                }
+
+                button{
+                    border: 2px solid $brown-color;
+                    background: $white-color;
+                    padding: 0.2rem 1rem;
+                    color: $brown-color;
+                    font-weight: 500;
+                    border-radius: 0.3rem;
+                    transition: all 0.3s;
+
+                    &:hover{
+                        background: $search-color;
+                    }
+                }
+            }
+        }
+
+    }
+    .cartAddressRight{
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+
+        h3 {
+            font-size: 1rem;
+            color: $brown-color;
+            text-transform: uppercase;
+
+            span {
+                text-transform: capitalize;
+            }
+        }
+
+        >div {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin: 0.4rem 0;
+        }
+
+        p {
+            margin: 0;
+
+        }
+
+        strong {
+            font-weight: 600;
+        }
+        
+    }
+}

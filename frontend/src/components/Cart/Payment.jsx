@@ -98,9 +98,9 @@ const Payment = () => {
         }
       },
       prefill: {
-        name: "user.name",
-        email: "user@gmail.com",
-        contact: "9000090000",
+        name: user.name,
+        email: user.email,
+        contact: shippingInfo.phoneNumber,
       },
       notes: {
         address: "Raasiya Corporate Office",
@@ -125,8 +125,47 @@ const Payment = () => {
       <MetaData title="Payment" />
       <CheckOutSteps activeStep={2} />
 
-      <div className="paymentContainer">
-        <button onClick={submitHandler}>Pay</button>
+      <div className="cartAddress">
+        <div className="cartAddressLeft">
+          <button onClick={submitHandler} className="myBtn">
+            Pay
+          </button>
+        </div>
+        <div className="cartAddressRight">
+          <div>
+            <h3>
+              Price Details{" "}
+              <span>
+                ({cartItems.length} {cartItems.length > 1 ? "Items" : "Item"})
+              </span>
+            </h3>
+          </div>
+          <div>
+            <p>Subtotal:</p>
+            <span>Rs. {orderInfo.subtotal}</span>
+          </div>
+          <div>
+            <p>
+              Shipping Charges
+              <br />
+              (free above 1000):
+            </p>
+            <span>Rs. {orderInfo.shippingCharges}</span>
+          </div>
+          <div>
+            <p>GST:</p>
+            <span>Rs. {orderInfo.tax}</span>
+          </div>
+          <hr />
+          <div>
+            <p>
+              <strong>Total:</strong>
+            </p>
+            <span>
+              <strong>Rs. {orderInfo.totalPrice}</strong>
+            </span>
+          </div>
+        </div>
       </div>
     </Fragment>
   );

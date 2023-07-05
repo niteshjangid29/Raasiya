@@ -33,7 +33,8 @@ const Cart = () => {
   };
 
   const checkOutHandler = () => {
-    navigate("/login?redirect=shipping");
+    // navigate("/login?redirect=shipping");
+    navigate("/login?redirect=checkout/cart");
   };
   return (
     <Fragment>

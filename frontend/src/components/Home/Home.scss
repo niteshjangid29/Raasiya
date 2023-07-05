@@ -126,11 +126,12 @@ $white-color: #ffffff;
 }
 
 .myBtn{
+    border: none;
     text-decoration: none;
     background-color: $brown-color;
     color: $white-color;
     padding: 0.5rem 1rem;
-    margin: 1rem;
+    margin: 1rem 0;
 }
 .heading{
     text-align: center;

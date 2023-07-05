@@ -8,7 +8,7 @@ import Products from "./components/Products/Products";
 import Register from "./components/User/Register";
 import Login from "./components/User/Login";
 import store from "./store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { loadUser } from "./actions/userActions";
 // import { useSelector } from "react-redux";
 import Profile from "./components/User/Profile";
@@ -36,24 +36,26 @@ import UsersList from "./components/Admin/UsersList";
 import UpdateUser from "./components/Admin/UpdateUser";
 import ProductReview from "./components/Admin/ProductReview";
 import NotFound from "./components/layout/Not Found/NotFound";
-import axios from "axios";
+import Cart1 from "./components/Cart/Cart1";
+import Address from "./components/Cart/Address";
+// import axios from "axios";
 
 function App() {
   // const { user } = useSelector((state) => state.user);
-  const [razorpayApiKey, setRazorpayApiKey] = useState("");
+  // const [razorpayApiKey, setRazorpayApiKey] = useState("");
 
-  async function getRazorpayApiKey() {
-    const { data } = await axios.get("/api/v1/razorpayapikey");
+  // async function getRazorpayApiKey() {
+  //   const { data } = await axios.get("/api/v1/razorpayapikey");
 
-    setRazorpayApiKey(data.razorpayApiKey);
-  }
+  //   setRazorpayApiKey(data.razorpayApiKey);
+  // }
   useEffect(() => {
     store.dispatch(loadUser());
 
-    getRazorpayApiKey();
+    // getRazorpayApiKey();
   }, []);
 
-  window.addEventListener("contextmenu", (e) => e.preventDefault());
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <BrowserRouter>
       <Navbar />
@@ -100,25 +102,37 @@ function App() {
             element={<ResetPassword />}
           />
 
-          <Route exact path="/cart" element={<Cart />} />
-
+          {/* <Route exact path="/cart" element={<Cart />} /> */}
           <Route
+            exact
+            path="/checkout/cart"
+            element={<ProtectedRoute component={Cart1} />}
+          />
+
+          {/* <Route
             exact
             path="/shipping"
             element={<ProtectedRoute component={Shipping} />}
-          />
+        />*/}
 
           <Route
             exact
-            path="/order/confirm"
-            element={<ProtectedRoute component={ConfirmOrder} />}
+            path="/checkout/address"
+            element={<ProtectedRoute component={Address} />}
           />
 
-          <Route
+          {/* <Route
             exact
             path="/process/payment"
             element={<ProtectedRoute component={Payment} />}
+          /> */}
+
+          <Route
+            exact
+            path="/checkout/payment"
+            element={<ProtectedRoute component={Payment} />}
           />
+
           <Route
             exact
             path="/success"
