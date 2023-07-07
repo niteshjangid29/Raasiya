@@ -29,6 +29,9 @@ import {
   DELETE_REVIEW_REQUEST,
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAIL,
+  CATEGORY_PRODUCTS_REQUEST,
+  CATEGORY_PRODUCTS_SUCCESS,
+  CATEGORY_PRODUCTS_FAIL,
 } from "../constants/productConstants";
 
 export const getProduct =
@@ -228,6 +231,22 @@ export const deleteReview = (reviewId, productId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// get products of a Category
+export const getAllCategoryProducts = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: CATEGORY_PRODUCTS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/categories/${category}`);
+
+    dispatch({ type: CATEGORY_PRODUCTS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: CATEGORY_PRODUCTS_FAIL,
       payload: error.response.data.message,
     });
   }

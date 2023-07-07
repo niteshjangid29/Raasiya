@@ -39,6 +39,7 @@ import NotFound from "./components/layout/Not Found/NotFound";
 import Cart1 from "./components/Cart/Cart1";
 import Address from "./components/Cart/Address";
 import NewStory from "./components/Story/NewStory";
+import CategoryProducts from "./components/Products/CategoryProducts";
 // import axios from "axios";
 
 function App() {
@@ -200,6 +201,12 @@ function App() {
           />
 
           <Route path="/story/new" element={<NewStory />} />
+
+          <Route
+            exact
+            path="/categories/:category"
+            element={<CategoryProducts />}
+          />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

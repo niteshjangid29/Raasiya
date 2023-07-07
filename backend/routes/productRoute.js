@@ -10,6 +10,7 @@ const {
   deleteReview,
   getAllCategories,
   getAdminProducts,
+  getProductsByCategory,
 } = require("../controllers/productController");
 const router = express.Router();
 const { isAuthenticatedUser, authorizedRoles } = require("../middleware/auth");
@@ -48,5 +49,7 @@ router
   .delete(isAuthenticatedUser, deleteReview);
 
 router.route("/categories").get(getAllCategories);
+
+router.route("/categories/:category").get(getProductsByCategory);
 
 module.exports = router;

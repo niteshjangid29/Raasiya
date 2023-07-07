@@ -6,9 +6,11 @@ import Loader from "../layout/Loader/Loader";
 import ProductCard from "../Product/ProductCard";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import { useAlert } from "react-alert";
 
 const Products = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -21,8 +23,12 @@ const Products = () => {
     setCurrentPage(e);
   };
   useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
     dispatch(getProduct(keyword, currentPage));
-  }, [dispatch, keyword, currentPage]);
+  }, [dispatch, keyword, currentPage, alert, error]);
   return (
     <Fragment>
       {loading ? (

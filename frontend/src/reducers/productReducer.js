@@ -32,6 +32,9 @@ import {
   DELETE_REVIEW_REQUEST,
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAIL,
+  CATEGORY_PRODUCTS_REQUEST,
+  CATEGORY_PRODUCTS_FAIL,
+  CATEGORY_PRODUCTS_SUCCESS,
 } from "../constants/productConstants";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -54,6 +57,7 @@ export const productsReducer = (state = { products: [] }, action) => {
         loading: false,
         products: action.payload,
       };
+
     case ALL_PRODUCT_FAIL:
     case ADMIN_PRODUCT_FAIL:
       return {
@@ -268,6 +272,38 @@ export const reviewReducer = (state = {}, action) => {
       return {
         ...state,
         isDeleted: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const categoryProductsReducer = (
+  state = { categoryProducts: [] },
+  action
+) => {
+  switch (action.type) {
+    case CATEGORY_PRODUCTS_REQUEST:
+      return {
+        loading: true,
+        categoryProducts: [],
+      };
+    case CATEGORY_PRODUCTS_SUCCESS:
+      return {
+        loading: false,
+        categoryProducts: action.payload.categoryProducts,
+      };
+
+    case CATEGORY_PRODUCTS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {
