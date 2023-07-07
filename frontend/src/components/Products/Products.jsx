@@ -36,7 +36,7 @@ const Products = () => {
       ) : (
         <Fragment>
           <div className="container products-box">
-            <h2 className="heading productHeading">Products</h2>
+            <h2 className="heading productHeading">{productsCount} Products</h2>
             <div className="fiter"></div>
             <div className="products-box-1">
               <div className="products">

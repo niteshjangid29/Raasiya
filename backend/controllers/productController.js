@@ -252,17 +252,25 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Products Categories
+// Get All Categories
 exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
   const categories = [];
+  const categoryImage = [];
+
+  // const pairs = keys.map((key, index) => ({ key, value: values[index] }));
 
   for (const product of products) {
     if (!categories.includes(product.category)) {
       categories.push(product.category);
+      categoryImage.push(product.images[0].url);
     }
   }
-  const categoriesCount = await categories.length;
+
+  const categoryPair = categories.map((key, index) => ({
+    key,
+    value: categoryImage[index],
+  }));
 
   if (!categories) {
     return next(new ErrorHandler("Category not found", 404));
@@ -270,8 +278,7 @@ exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    categories,
-    categoriesCount,
+    categoryPair,
   });
 });
 

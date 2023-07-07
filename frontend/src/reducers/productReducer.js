@@ -35,6 +35,9 @@ import {
   CATEGORY_PRODUCTS_REQUEST,
   CATEGORY_PRODUCTS_FAIL,
   CATEGORY_PRODUCTS_SUCCESS,
+  ALL_CATEGORIES_REQUEST,
+  ALL_CATEGORIES_SUCCESS,
+  ALL_CATEGORIES_FAIL,
 } from "../constants/productConstants";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -285,7 +288,10 @@ export const reviewReducer = (state = {}, action) => {
 };
 
 export const categoryProductsReducer = (
-  state = { categoryProducts: [] },
+  state = {
+    categoryProducts: [],
+    categoryPair: [[], []],
+  },
   action
 ) => {
   switch (action.type) {
@@ -294,13 +300,24 @@ export const categoryProductsReducer = (
         loading: true,
         categoryProducts: [],
       };
+    case ALL_CATEGORIES_REQUEST:
+      return {
+        loading: true,
+        categoryPair: [[], []],
+      };
     case CATEGORY_PRODUCTS_SUCCESS:
       return {
         loading: false,
         categoryProducts: action.payload.categoryProducts,
       };
+    case ALL_CATEGORIES_SUCCESS:
+      return {
+        loading: false,
+        categoryPair: action.payload.categoryPair,
+      };
 
     case CATEGORY_PRODUCTS_FAIL:
+    case ALL_CATEGORIES_FAIL:
       return {
         loading: false,
         error: action.payload,

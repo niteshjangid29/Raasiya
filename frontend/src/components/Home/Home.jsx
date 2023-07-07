@@ -2,7 +2,11 @@ import React, { Fragment, useEffect } from "react";
 import "./Home.scss";
 import ProductCard from "../Product/ProductCard";
 import MetaData from "../layout/MetaData";
-import { clearErrors, getProduct } from "../../actions/productActions";
+import {
+  clearErrors,
+  getAllCategories,
+  getProduct,
+} from "../../actions/productActions";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
@@ -21,6 +25,7 @@ const Home = () => {
   const alert = useAlert();
 
   const { loading, error, products } = useSelector((state) => state.products);
+  const { categoryPair } = useSelector((state) => state.categoryProducts);
 
   let bestSellerProducts = 0;
 
@@ -32,6 +37,7 @@ const Home = () => {
       dispatch(clearErrors());
     }
     dispatch(getProduct());
+    dispatch(getAllCategories());
   }, [dispatch, alert, error]);
   return (
     <Fragment>
@@ -89,10 +95,14 @@ const Home = () => {
             <div className="product-categories container">
               <h2 className="heading">Product Categories</h2>
               <div className="categoryBox">
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard />
-                <CategoryCard />
+                {categoryPair &&
+                  categoryPair.map((category) => (
+                    <CategoryCard
+                      key={category.key}
+                      name={category.key}
+                      image_url={category.value}
+                    />
+                  ))}
               </div>
             </div>
 

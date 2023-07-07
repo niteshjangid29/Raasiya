@@ -32,6 +32,9 @@ import {
   CATEGORY_PRODUCTS_REQUEST,
   CATEGORY_PRODUCTS_SUCCESS,
   CATEGORY_PRODUCTS_FAIL,
+  ALL_CATEGORIES_REQUEST,
+  ALL_CATEGORIES_SUCCESS,
+  ALL_CATEGORIES_FAIL,
 } from "../constants/productConstants";
 
 export const getProduct =
@@ -247,6 +250,21 @@ export const getAllCategoryProducts = (category) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CATEGORY_PRODUCTS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+// get All Categories
+export const getAllCategories = () => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_CATEGORIES_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/categories`);
+
+    dispatch({ type: ALL_CATEGORIES_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ALL_CATEGORIES_FAIL,
       payload: error.response.data.message,
     });
   }

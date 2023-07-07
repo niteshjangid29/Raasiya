@@ -12,7 +12,11 @@ import {
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { clearErrors, createProduct } from "../../actions/productActions";
+import {
+  clearErrors,
+  createProduct,
+  getAllCategories,
+} from "../../actions/productActions";
 import { useNavigate } from "react-router-dom";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 
@@ -22,6 +26,7 @@ const NewProduct = () => {
   const navigate = useNavigate();
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { categoryPair } = useSelector((state) => state.categoryProducts);
 
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
@@ -34,15 +39,6 @@ const NewProduct = () => {
   const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-  const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
-  ];
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
@@ -97,6 +93,7 @@ const NewProduct = () => {
       navigate("/admin/dashboard");
 
       dispatch({ type: NEW_PRODUCT_RESET });
+      dispatch(getAllCategories());
     }
   }, [alert, error, dispatch, success, navigate]);
   return (
@@ -192,9 +189,9 @@ const NewProduct = () => {
               <MdAccountTree />
               <select onChange={(e) => setCategory(e.target.value)}>
                 <option value="">Choose Category</option>
-                {categories.map((cate) => (
-                  <option key={cate} value={cate}>
-                    {cate}
+                {categoryPair.map((category) => (
+                  <option key={category} value={category.key}>
+                    {category.key}
                   </option>
                 ))}
               </select>
