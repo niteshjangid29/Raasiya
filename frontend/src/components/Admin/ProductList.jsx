@@ -75,7 +75,7 @@ const ProductList = () => {
 
   products &&
     products.forEach((item) => {
-      rows.push({
+      rows.unshift({
         id: item._id,
         stock: item.Stock,
         price: item.price,

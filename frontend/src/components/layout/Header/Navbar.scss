@@ -29,7 +29,8 @@ $search-color: #F0EBE8;
 
     .nav-left{
         display: flex;
-        width: 10%;
+        // width: 10%;
+        min-width: 18rem;
         // justify-content: center;
 
         .logo {
@@ -57,12 +58,13 @@ $search-color: #F0EBE8;
                 width: 100%;
                 // background: red;
                 .logo-raasiya {
-                        width: 8rem;
-                    }
+                    width: 8rem;
+                }
             }
             .input-div{
                 display: flex;
                 align-items: center;
+                // background: red;
 
                 svg{
                     position: absolute;

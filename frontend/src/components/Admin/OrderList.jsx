@@ -82,7 +82,7 @@ const OrderList = () => {
 
   orders &&
     orders.forEach((item) => {
-      rows.push({
+      rows.unshift({
         id: item._id,
         itemsQty: item.orderItems.length,
         amount: item.totalPrice,

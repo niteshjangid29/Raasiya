@@ -15,7 +15,7 @@ $search-color: #F0EBE8;
     padding: 2rem 0;
 
     h3{
-        font-size: 1.3rem;
+        font-size: 1rem;
         text-transform: uppercase;
     }
     .cartBagItems{
@@ -23,8 +23,10 @@ $search-color: #F0EBE8;
         display: flex;
         flex-direction: column;
         border-right: 1px solid $grey-color;
-        justify-content: center;
-        padding: 0 1rem;
+        // justify-content: center;
+        font-size: 1rem;
+        padding: 1rem 1rem;
+        color: $brown-color;
         
         .HeaderCartItemCard{
             border: 1px solid $grey-color;

@@ -17,9 +17,9 @@ import UpdateProfile from "./components/User/UpdateProfile";
 import UpdatePassword from "./components/User/UpdatePassword";
 import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
-import Cart from "./components/Cart/Cart";
-import Shipping from "./components/Cart/Shipping";
-import ConfirmOrder from "./components/Cart/ConfirmOrder";
+// import Cart from "./components/Cart/Cart";
+// import Shipping from "./components/Cart/Shipping";
+// import ConfirmOrder from "./components/Cart/ConfirmOrder";
 import Navbar from "./components/layout/Header/Navbar";
 import Footer from "./components/layout/Footer/Footer";
 import Payment from "./components/Cart/Payment";
@@ -38,6 +38,7 @@ import ProductReview from "./components/Admin/ProductReview";
 import NotFound from "./components/layout/Not Found/NotFound";
 import Cart1 from "./components/Cart/Cart1";
 import Address from "./components/Cart/Address";
+import NewStory from "./components/Story/NewStory";
 // import axios from "axios";
 
 function App() {
@@ -197,6 +198,8 @@ function App() {
               <ProtectedRoute isAdmin={true} component={ProductReview} />
             }
           />
+
+          <Route path="/story/new" element={<NewStory />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

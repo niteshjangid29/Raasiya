@@ -10,7 +10,11 @@ const OrderSuccess = () => {
     <div className="orderSuccess">
       <FaCheckCircle />
 
-      <Typography>Your Order has been Placed successfully </Typography>
+      <Typography>
+        <span>Congratulations!</span>
+        <br />
+        Your Order has been Placed Successfully{" "}
+      </Typography>
       <Link to="/orders">View Orders</Link>
     </div>
   );
