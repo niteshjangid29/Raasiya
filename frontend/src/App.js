@@ -63,7 +63,7 @@ function App() {
       <Navbar />
 
       {/* <Header user={user} /> */}
-      <div style={{ marginTop: "7.2rem" }}>
+      <div style={{ marginTop: "6.8rem" }}>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/product/:id" element={<ProductDetails />} />

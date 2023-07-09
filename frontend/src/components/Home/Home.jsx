@@ -61,34 +61,19 @@ const Home = () => {
               className="homeSwiper"
             >
               <SwiperSlide>
-                <img
-                  src="https://suta.in/cdn/shop/files/IWL_Website_Desktop_Banner_1800x.jpg?v=1686572875"
-                  alt="Images 1"
-                />
+                <img src="./slide1.webp" alt="Images 1" />
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://suta.in/cdn/shop/files/this_is_me_website_banner__after_15_days_1800x.png?v=1686483623"
-                  alt="Images 2"
-                />
+                <img src="./slide2.webp" alt="Images 2" />
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://suta.in/cdn/shop/files/clearancesale_websitebanner_1800x.png?v=1674925496"
-                  alt="Images 3"
-                />
+                <img src="./slide3.webp" alt="Images 3" />
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://suta.in/cdn/shop/files/IMG_5480_1800x.jpg?v=1647280779"
-                  alt="Images 4"
-                />
+                <img src="./slide4.webp" alt="Images 4" />
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://suta.in/cdn/shop/files/Suta-Bag_1800x.jpg?v=1647256422"
-                  alt="Images 5"
-                />
+                <img src="./slide5.webp" alt="Images 5" />
               </SwiperSlide>
             </Swiper>
 

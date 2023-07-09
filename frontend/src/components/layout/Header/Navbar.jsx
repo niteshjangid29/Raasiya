@@ -155,12 +155,84 @@ const Navbar = () => {
             <ul className="nav-down-1">
               <li>
                 <Link to="/">Collections</Link>
+                <div className="hover-box">
+                  <div>
+                    <ul className="hover-box-left">
+                      <li>
+                        <Link to="/">BED SHEET</Link>
+                        <ul>
+                          <li className="hover-sub-heading">SINGLE</li>
+                          <li>DOUBLE</li>
+                          <li>LARGE</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <Link to="/">BED SHEET</Link>
+                        <ul>
+                          <li>SINGLE</li>
+                          <li>DOUBLE</li>
+                          <li>LARGE</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <Link to="/">BED SHEET</Link>
+                        <ul>
+                          <li>SINGLE</li>
+                          <li>DOUBLE</li>
+                          <li>LARGE</li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div className="hover-box-right">
+                      <img
+                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
+                        alt="collections"
+                      />
+                    </div>
+                  </div>
+                </div>
               </li>
               <li>
                 <Link to="/">Bedroom</Link>
               </li>
               <li>
                 <Link to="/">Living Room</Link>
+                <div className="hover-box">
+                  <div>
+                    <ul className="hover-box-left">
+                      <li>
+                        <Link to="/">BED SHEET</Link>
+                        <ul>
+                          <li className="hover-sub-heading">SINGLE</li>
+                          <li>DOUBLE</li>
+                          <li>LARGE</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <Link to="/">BED SHEET</Link>
+                        <ul>
+                          <li>SINGLE</li>
+                          <li>DOUBLE</li>
+                          <li>LARGE</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <Link to="/">BED SHEET</Link>
+                        <ul>
+                          <li>SINGLE</li>
+                          <li>DOUBLE</li>
+                          <li>LARGE</li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div className="hover-box-right">
+                      <img
+                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
+                        alt="collections"
+                      />
+                    </div>
+                  </div>
+                </div>
               </li>
               <li>
                 <Link to="/">Kitchen</Link>
@@ -205,10 +277,6 @@ const Navbar = () => {
                   }}
                   className="account-menu"
                 >
-                  {/* <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>My Orders</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Logout</MenuItem> */}
                   {options.map((item) => (
                     <MenuItem key={item.name} onClick={item.func}>
                       {item.name}

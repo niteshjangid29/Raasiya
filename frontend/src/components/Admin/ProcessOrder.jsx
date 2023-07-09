@@ -3,7 +3,7 @@ import "./ProcessOrder.scss";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import { Button, Typography } from "@mui/material";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useAlert } from "react-alert";
 import {
@@ -17,7 +17,6 @@ import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 
 const ProcessOrder = () => {
   const alert = useAlert();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id: orderId } = useParams();
 

@@ -1,0 +1,117 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+$search-color: #F0EBE8;
+
+.products-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+
+    >div{
+        display: flex;
+        width: 100%;
+    }
+
+    .filter{
+        padding: 1.5rem;
+        width: 30rem;
+        max-width: 30rem;
+        background: $grey-color;
+
+        >div{
+            span{
+                color: $brown-color;
+
+                &:focus, &:hover, &.Mui-active, &.Mui-focusVisible{
+                    box-shadow: none;
+                }
+                & .MuiSlider-valueLabel {
+                    background-color: $brown-color;
+
+                }
+                &.MuiSlider-valueLabelLabel{
+                    color: $white-color;
+                }
+            }
+            .input-price {
+                display: flex;
+                justify-content: space-between;
+
+                .MuiInputBase-colorPrimary::after{
+                    border-bottom:2px solid $brown-color;
+                }
+            }
+            p{
+                color: $brown-color;
+                margin-top: 1rem;
+                font-weight: 500;
+            }
+            li{
+                cursor: pointer;
+
+                &:hover{
+                    color: $brown-color;
+                }
+            }
+        }
+    }
+    .products-box-1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+.productHeading{
+    margin: 1rem auto 2rem;
+}
+
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.paginationBox{
+    display: flex;
+    justify-content: center;
+    margin: 2.5rem 0.3rem;
+}
+.pagination{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+.page-items{
+    background-color: #fff;
+    list-style: none;
+    margin: 0.2rem 0.1rem;
+    padding: 0.4rem 0rem;
+    border: 1px solid #c1bfbf;
+    transition: all 0.3s;
+}
+.page-items:hover{
+    background-color: #e9e9e9;
+}
+.page-links{
+    padding: 0.5rem 0.8rem;
+    width: 100%;
+    color: #333333;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.pageItemActive{
+    background-color: #e9e9e9;
+    border-color: #5c5c5c;
+}
+.pageLinkActive{
+    font-weight: 500;
+}
