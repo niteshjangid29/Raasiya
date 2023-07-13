@@ -48,7 +48,7 @@ $white-color: #ffffff;
             margin: 1rem 1rem 0;
             
             >div{
-                width: 5.5rem;
+                width: 7rem;
                 aspect-ratio: 1;
                 overflow: hidden;
                 img {
@@ -58,6 +58,7 @@ $white-color: #ffffff;
             }
             p{
                 color: $brown-color;
+                font-weight: 500;
             }
             &:hover{
                 img{

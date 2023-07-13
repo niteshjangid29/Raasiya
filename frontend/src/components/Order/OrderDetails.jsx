@@ -33,7 +33,77 @@ const OrderDetails = () => {
           <MetaData title="Order Details" />
 
           <div className="orderDetailsPage">
-            <div className="orderDetailsContainer">
+            <div className="container">
+              <div className="cartBag">
+                <div className="cartBagItems">
+                  <h3>My Orders</h3>
+
+                  <div className="myOrderItems">
+                    {order.orderItems &&
+                      order.orderItems.map((item) => (
+                        <div className="orderItem" key={item.product}>
+                          <img src={item.image} alt="Product" />
+                          <div>
+                            <Link to={`/product/${item.product}`}>
+                              {item.name}
+                            </Link>
+                            <span>
+                              {item.quantity} x Rs.{item.price} ={" "}
+                              <b>Rs.{item.price * item.quantity}</b>
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+                <div className="cartBagPayment">
+                  <div>
+                    <h3>
+                      Order Details{" "}
+                      {order.orderItems && (
+                        <span>
+                          ({order.orderItems.length}{" "}
+                          {order.orderItems.length > 1 ? "Items" : "Item"})
+                        </span>
+                      )}
+                    </h3>
+                  </div>
+                  <div>
+                    <p>
+                      Order ID: <span>{order._id}</span>
+                    </p>
+                  </div>
+                  <hr />
+                  <div>
+                    <h4>Order Payment Details</h4>
+                  </div>
+                  <div>
+                    <p>Order Amount:</p>
+                    <span>Rs. {order.totalPrice}</span>
+                  </div>
+                  <div>
+                    <p>
+                      Shipping Charges
+                      <br />
+                      (free above 1000):
+                    </p>
+                    {/* <span>Rs. {shippingCharges}</span> */}
+                  </div>
+                  <div>
+                    <p>GST:</p>
+                    {/* <span>Rs. {tax}</span> */}
+                  </div>
+                  <hr />
+                  <div>
+                    <p>
+                      <strong>Total:</strong>
+                    </p>
+                    <span>{/* <strong>Rs. {totalPrice}</strong> */}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="orderDetailsContainer">
               <Typography component="h1">
                 Order #{order && order._id}
               </Typography>
@@ -94,9 +164,9 @@ const OrderDetails = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className="orderDetailsCartItems">
+            {/* <div className="orderDetailsCartItems">
               <Typography>Order Items:</Typography>
               <div className="orderDetailsCartItemsContainer">
                 {order.orderItems &&
@@ -111,7 +181,7 @@ const OrderDetails = () => {
                     </div>
                   ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </Fragment>
       )}

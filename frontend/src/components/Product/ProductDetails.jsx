@@ -271,7 +271,7 @@ const ProductDetails = () => {
                     {product.collections}
                   </p>
                   <p>
-                    <strong>Type:</strong>
+                    <strong>Category:</strong>
                     {product.category}
                   </p>
                 </div>
