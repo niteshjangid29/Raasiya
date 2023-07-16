@@ -40,6 +40,21 @@ const Sidebar = () => {
           </TreeItem>
         </TreeView>
       </Link>
+      <Link>
+        <TreeView
+          defaultCollapseIcon={<MdExpandMore />}
+          defaultExpandIcon={<MdImportExport />}
+        >
+          <TreeItem nodeId="1" label="Stories">
+            <Link to="/admin/products">
+              <TreeItem nodeId="2" label="All" icon={<MdPostAdd />} />
+            </Link>
+            <Link to="/admin/story/new">
+              <TreeItem nodeId="3" label="Create" icon={<MdPostAdd />} />
+            </Link>
+          </TreeItem>
+        </TreeView>
+      </Link>
       <Link to="/admin/orders">
         <p>
           <MdListAlt />
