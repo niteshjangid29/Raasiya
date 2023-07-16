@@ -109,12 +109,12 @@ const Home = () => {
             <div className="blogs container">
               <h2 className="heading">Stories</h2>
               <div className="blogBox">
+                {/* <BlogCard />
                 <BlogCard />
                 <BlogCard />
-                <BlogCard />
-                <BlogCard />
+                <BlogCard /> */}
               </div>
-              <Link to="/blogs" className="myBtn">
+              <Link to="/stories" className="myBtn">
                 View All Stories
               </Link>
               {/* <Swiper

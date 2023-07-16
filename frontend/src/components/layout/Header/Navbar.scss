@@ -144,9 +144,9 @@ $search-color: #F0EBE8;
                     .hover-box{
                         position: absolute;
                         display: none;
-                        width: 50rem;
+                        width: 40rem;
                         margin: auto;
-                        left: 0;
+                        left: 10%;
                         transform: translateX(50%) translateY(0.55rem);
                         border-top: 2px solid $brown-color;
                         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -161,10 +161,21 @@ $search-color: #F0EBE8;
                                 flex: 3;
                                 display: flex;
                                 justify-content: space-between;
+                                align-items: flex-start;
 
                                 li{
+                                    p{
+                                        color: $brown-color;
+                                        margin: 0;
+                                    }
                                     a{
+                                        font-size: 0.9rem;
                                         padding: 0;
+                                        color: $black-color;
+
+                                        &:hover{
+                                            color: $brown-color;
+                                        }
                                     }
                                 }
                                 

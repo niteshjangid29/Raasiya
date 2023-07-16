@@ -40,6 +40,7 @@ import Cart1 from "./components/Cart/Cart1";
 import Address from "./components/Cart/Address";
 import NewStory from "./components/Story/NewStory";
 import CategoryProducts from "./components/Products/CategoryProducts";
+import Stories from "./components/Story/Stories";
 // import axios from "axios";
 
 function App() {
@@ -200,13 +201,18 @@ function App() {
             }
           />
 
-          <Route path="/story/new" element={<NewStory />} />
-
           <Route
             exact
             path="/categories/:category"
             element={<CategoryProducts />}
           />
+
+          <Route
+            path="/admin/story/new"
+            element={<ProtectedRoute isAdmin={true} component={NewStory} />}
+          />
+
+          <Route exact path="/stories" element={<Stories />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

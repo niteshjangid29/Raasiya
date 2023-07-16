@@ -155,31 +155,58 @@ const Navbar = () => {
             <ul className="nav-down-1">
               <li>
                 <Link to="/">Collections</Link>
+              </li>
+              <li>
+                <Link to="/">Bedroom</Link>
                 <div className="hover-box">
                   <div>
                     <ul className="hover-box-left">
                       <li>
-                        <Link to="/">BED SHEET</Link>
+                        <p>BED SHEET</p>
                         <ul>
-                          <li className="hover-sub-heading">SINGLE</li>
-                          <li>DOUBLE</li>
-                          <li>LARGE</li>
+                          <li>
+                            <Link to="/">SINGLE</Link>
+                          </li>
+                          <li>
+                            <Link to="/">DOUBLE</Link>
+                          </li>
+                          <li>
+                            <Link to="/">FITTED</Link>
+                          </li>
                         </ul>
                       </li>
                       <li>
-                        <Link to="/">BED SHEET</Link>
+                        <p>QUILT</p>
                         <ul>
-                          <li>SINGLE</li>
-                          <li>DOUBLE</li>
-                          <li>LARGE</li>
+                          <li>
+                            <Link to="/">SINGLE</Link>
+                          </li>
+                          <li>
+                            <Link to="/">DOUBLE</Link>
+                          </li>
+                        </ul>
+                        <p>BLANKET</p>
+                        <ul>
+                          <li>
+                            <Link to="/">SINGLE</Link>
+                          </li>
+                          <li>
+                            <Link to="/">DOUBLE</Link>
+                          </li>
                         </ul>
                       </li>
                       <li>
-                        <Link to="/">BED SHEET</Link>
+                        <p>KIDS</p>
                         <ul>
-                          <li>SINGLE</li>
-                          <li>DOUBLE</li>
-                          <li>LARGE</li>
+                          <li>
+                            <Link to="/">BEDSHEET</Link>
+                          </li>
+                          <li>
+                            <Link to="/">QUILT</Link>
+                          </li>
+                          <li>
+                            <Link to="/">DOHAR</Link>
+                          </li>
                         </ul>
                       </li>
                     </ul>
@@ -193,35 +220,28 @@ const Navbar = () => {
                 </div>
               </li>
               <li>
-                <Link to="/">Bedroom</Link>
-              </li>
-              <li>
                 <Link to="/">Living Room</Link>
                 <div className="hover-box">
                   <div>
                     <ul className="hover-box-left">
                       <li>
-                        <Link to="/">BED SHEET</Link>
+                        <p>LIVING ROOM</p>
                         <ul>
-                          <li className="hover-sub-heading">SINGLE</li>
-                          <li>DOUBLE</li>
-                          <li>LARGE</li>
+                          <li>
+                            <Link to="/">CURTAIN</Link>
+                          </li>
+                          <li>
+                            <Link to="/">CUSHIONS</Link>
+                          </li>
+                          <li>
+                            <Link to="/">UPHOLSTERY</Link>
+                          </li>
                         </ul>
-                      </li>
-                      <li>
-                        <Link to="/">BED SHEET</Link>
+                        <p>RUGS</p>
                         <ul>
-                          <li>SINGLE</li>
-                          <li>DOUBLE</li>
-                          <li>LARGE</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <Link to="/">BED SHEET</Link>
-                        <ul>
-                          <li>SINGLE</li>
-                          <li>DOUBLE</li>
-                          <li>LARGE</li>
+                          <li>
+                            <Link to="/">TABLE CLOTH</Link>
+                          </li>
                         </ul>
                       </li>
                     </ul>
@@ -236,9 +256,67 @@ const Navbar = () => {
               </li>
               <li>
                 <Link to="/">Kitchen</Link>
+                <div className="hover-box">
+                  <div>
+                    <ul className="hover-box-left">
+                      <li>
+                        <p>KITCHEN</p>
+                        <ul>
+                          <li>
+                            <Link to="/">KITCHEN LINEN</Link>
+                          </li>
+                          <li>
+                            <Link to="/">APRON</Link>
+                          </li>
+                          <li>
+                            <Link to="/">DISH TOWEL</Link>
+                          </li>
+                          <li>
+                            <Link to="/">POT HOLDER</Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div className="hover-box-right">
+                      <img
+                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
+                        alt="collections"
+                      />
+                    </div>
+                  </div>
+                </div>
               </li>
               <li>
                 <Link to="/">Bath</Link>
+                <div className="hover-box">
+                  <div>
+                    <ul className="hover-box-left">
+                      <li>
+                        <p>TOWEL</p>
+                        <ul>
+                          <li>
+                            <Link to="/">BATH TOWEL</Link>
+                          </li>
+                          <li>
+                            <Link to="/">HAND TOWEL</Link>
+                          </li>
+                          <li>
+                            <Link to="/">FACE TOWEL</Link>
+                          </li>
+                          <li>
+                            <Link to="/">KIDS TOWEL</Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div className="hover-box-right">
+                      <img
+                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
+                        alt="collections"
+                      />
+                    </div>
+                  </div>
+                </div>
               </li>
               <li>
                 <Link to="/">Stories</Link>
