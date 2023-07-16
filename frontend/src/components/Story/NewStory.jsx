@@ -9,6 +9,7 @@ import { clearErrors, createStory } from "../../actions/storyActions";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { NEW_STORY_RESET } from "../../constants/storyConstants";
+import { FaLink } from "react-icons/fa";
 
 const NewStory = () => {
   const dispatch = useDispatch();
@@ -17,21 +18,40 @@ const NewStory = () => {
 
   const quillRef = useRef();
 
-  const imageHandler = () => {};
-
   const { loading, error, success, story } = useSelector(
     (state) => state.newStory
   );
 
   const [content, setContent] = useState({ value: null });
   const [title, setTitle] = useState("");
+  const [images, setImages] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState([]);
+
+  const createStoryImagesChange = (e) => {
+    const files = Array.from(e.target.files);
+
+    setImages([]);
+    setImagesPreview([]);
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImagesPreview((old) => [...old, reader.result]);
+          setImages((old) => [...old, reader.result]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   const createStorySubmitHandler = (e) => {
     e.preventDefault();
 
     const myFrom = new FormData();
 
-    myFrom.set("title", title);
+    // myFrom.set("title", title);
     myFrom.set("content", content.value);
 
     dispatch(createStory(myFrom));
@@ -55,6 +75,31 @@ const NewStory = () => {
     <div className="newStory">
       <div className="text-editor">
         <h1>Write a Story</h1>
+        <form action="" encType="multipart/form-data">
+          <input
+            type="file"
+            name="storyImg"
+            accept="image/*"
+            multiple
+            onChange={createStoryImagesChange}
+          />
+          <div className="storyImagePreview">
+            {imagesPreview.map((image, index) => (
+              <div>
+                <img key={index} src={image} alt="Story Images Preview" />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigator.clipboard.writeText(image);
+                  }}
+                >
+                  <FaLink />
+                  Copy Url
+                </button>
+              </div>
+            ))}
+          </div>
+        </form>
         <form
           action=""
           encType="multipart/form-data"

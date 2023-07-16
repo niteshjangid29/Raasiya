@@ -7,13 +7,12 @@ $grey-color: #C0C49B;
 $white-color: #ffffff;
 
 .newStory{
-    // background: red;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
     max-width: 90rem;
-    margin: auto    ;
+    margin: auto;
 
     .text-editor{
         background: white;
@@ -30,5 +29,32 @@ $white-color: #ffffff;
         display: flex;
         flex-direction: column;
         margin: 1rem 0;
+    }
+    .storyImagePreview{
+        display: flex;
+        width: 80rem;
+        >div{
+            display: flex;
+            align-items: center;
+            border: 2px solid $grey-color;
+            margin: 0.5rem 0;
+            padding: 0.2rem;
+            width: 100%;
+            >img{
+                width: 100px;
+                margin-right: 10px;
+            }
+            >button{
+                padding: 0.1rem 0.3rem;
+                outline: none;
+                border: 2px solid $grey-color;
+                border-radius: 0.3rem;
+
+                >svg{
+                    margin-right: 5px;
+                    font-size: 0.9rem;
+                }
+            }
+        }
     }
 }
