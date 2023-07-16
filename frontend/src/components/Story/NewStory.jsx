@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./NewStory.scss";
 import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats } from "./EditorToolbar";
+import EditorToolbar, { modules, formats, QuillToolbar } from "./EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,10 @@ const NewStory = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+
+  const quillRef = useRef();
+
+  const imageHandler = () => {};
 
   const { loading, error, success, story } = useSelector(
     (state) => state.newStory
@@ -68,6 +72,7 @@ const NewStory = () => {
             <EditorToolbar />
             <ReactQuill
               theme="snow"
+              ref={quillRef}
               value={content.value}
               onChange={(value) => setContent({ value })}
               placeholder={"Write something awesome..."}
@@ -83,8 +88,9 @@ const NewStory = () => {
             Create
           </button>
         </form>
-        <div dangerouslySetInnerHTML={{ __html: content.value }}></div>
-        {/* <ReactQuill value={state.value} readOnly theme="bubble" /> */}
+        {/* <div dangerouslySetInnerHTML={{ __html: content.value }}></div> */}
+        {/* <div>{content.value}</div> */}
+        {/* <ReactQuill value={content.value} readOnly theme="bubble" /> */}
       </div>
       <div className="fff"></div>
     </div>

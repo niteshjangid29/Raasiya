@@ -35,7 +35,10 @@ const BlogCard = ({ story }) => {
         <Link to={`/story/${story._id}`}>
           <h2>{story.title}</h2>
         </Link>
-        <div dangerouslySetInnerHTML={{ __html: story.content }}></div>
+        <div
+          className="xyz"
+          dangerouslySetInnerHTML={{ __html: story.content }}
+        ></div>
         <Link to={`/story/${story._id}`} className="read-more">
           Read More
         </Link>

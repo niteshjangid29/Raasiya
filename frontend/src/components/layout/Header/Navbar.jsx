@@ -236,11 +236,11 @@ const Navbar = () => {
                           <li>
                             <Link to="/">UPHOLSTERY</Link>
                           </li>
-                        </ul>
-                        <p>RUGS</p>
-                        <ul>
                           <li>
                             <Link to="/">TABLE CLOTH</Link>
+                          </li>
+                          <li>
+                            <Link to="/">RUGS</Link>
                           </li>
                         </ul>
                       </li>
