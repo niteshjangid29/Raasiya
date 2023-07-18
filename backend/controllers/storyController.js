@@ -4,11 +4,12 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 // Create a story
 exports.newStory = catchAsyncErrors(async (req, res, next) => {
-  const { title, content } = req.body;
+  const { title, content, images } = req.body;
 
   const story = await Story.create({
     title,
     content,
+    images,
     user: req.user._id,
   });
 

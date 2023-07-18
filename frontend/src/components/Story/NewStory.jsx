@@ -23,6 +23,7 @@ const NewStory = () => {
 
   const [content, setContent] = useState({ value: null });
   const [title, setTitle] = useState("");
+  const [images, setImages] = useState([]);
 
   const imageHandler = (e) => {
     const editor = quillRef.current.getEditor();
@@ -47,22 +48,38 @@ const NewStory = () => {
         );
 
         const imageUrl = response.data.secure_url;
+        const publicId = response.data.public_id;
+
         editor.insertEmbed(editor.getLength(), "image", imageUrl);
+
+        setImages((oldImages) => [
+          ...oldImages,
+          {
+            public_id: publicId,
+            url: imageUrl,
+          },
+        ]);
       } catch (error) {
         console.error("Image upload error", error);
       }
     };
   };
+  console.log(images);
 
   const createStorySubmitHandler = (e) => {
     e.preventDefault();
 
-    const myFrom = new FormData();
+    const myForm = new FormData();
 
-    myFrom.set("title", title);
-    myFrom.set("content", content.value);
+    myForm.set("title", title);
+    myForm.set("content", content.value);
 
-    dispatch(createStory(myFrom));
+    images.forEach((image, index) => {
+      myForm.append(`images[${index}][public_id]`, image.public_id);
+      myForm.append(`images[${index}][url]`, image.url);
+    });
+
+    dispatch(createStory(myForm));
   };
 
   const modules = useMemo(
