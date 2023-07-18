@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./NewStory.scss";
 import ReactQuill from "react-quill";
-import EditorToolbar, { modules, formats, QuillToolbar } from "./EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +8,7 @@ import { clearErrors, createStory } from "../../actions/storyActions";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { NEW_STORY_RESET } from "../../constants/storyConstants";
-import { FaLink } from "react-icons/fa";
+import axios from "axios";
 
 const NewStory = () => {
   const dispatch = useDispatch();
@@ -24,26 +23,35 @@ const NewStory = () => {
 
   const [content, setContent] = useState({ value: null });
   const [title, setTitle] = useState("");
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
 
-  const createStoryImagesChange = (e) => {
-    const files = Array.from(e.target.files);
+  const imageHandler = (e) => {
+    const editor = quillRef.current.getEditor();
+    // console.log(editor);
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
 
-    setImages([]);
-    setImagesPreview([]);
+    input.onchange = async () => {
+      const file = input.files[0];
 
-    files.forEach((file) => {
-      const reader = new FileReader();
+      const formData = new FormData();
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((old) => [...old, reader.result]);
-          setImages((old) => [...old, reader.result]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+      formData.append("file", file);
+      formData.append("upload_preset", "fo1xfxf9"); // Replace with your Cloudinary upload preset
+
+      try {
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dihlykute/image/upload", // Replace with your Cloudinary cloud name
+          formData
+        );
+
+        const imageUrl = response.data.secure_url;
+        editor.insertEmbed(editor.getLength(), "image", imageUrl);
+      } catch (error) {
+        console.error("Image upload error", error);
+      }
+    };
   };
 
   const createStorySubmitHandler = (e) => {
@@ -51,11 +59,56 @@ const NewStory = () => {
 
     const myFrom = new FormData();
 
-    // myFrom.set("title", title);
+    myFrom.set("title", title);
     myFrom.set("content", content.value);
 
     dispatch(createStory(myFrom));
   };
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: [
+          [{ header: "1" }, { header: "2" }, { font: [] }],
+          [{ size: [] }],
+          ["bold", "italic", "underline", "strike", "blockquote"],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" },
+          ],
+          ["link", "image"],
+          ["clean"],
+          ["code-block"],
+        ],
+        handlers: {
+          image: imageHandler,
+        },
+      },
+      clipboard: {
+        matchVisual: false,
+      },
+    }),
+    []
+  );
+  const formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "video",
+    "code-block",
+  ];
 
   useEffect(() => {
     if (error) {
@@ -75,31 +128,6 @@ const NewStory = () => {
     <div className="newStory">
       <div className="text-editor">
         <h1>Write a Story</h1>
-        <form action="" encType="multipart/form-data">
-          <input
-            type="file"
-            name="storyImg"
-            accept="image/*"
-            multiple
-            onChange={createStoryImagesChange}
-          />
-          <div className="storyImagePreview">
-            {imagesPreview.map((image, index) => (
-              <div>
-                <img key={index} src={image} alt="Story Images Preview" />
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    navigator.clipboard.writeText(image);
-                  }}
-                >
-                  <FaLink />
-                  Copy Url
-                </button>
-              </div>
-            ))}
-          </div>
-        </form>
         <form
           action=""
           encType="multipart/form-data"
@@ -114,7 +142,6 @@ const NewStory = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <div>
-            <EditorToolbar />
             <ReactQuill
               theme="snow"
               ref={quillRef}
@@ -137,7 +164,6 @@ const NewStory = () => {
         {/* <div>{content.value}</div> */}
         {/* <ReactQuill value={content.value} readOnly theme="bubble" /> */}
       </div>
-      <div className="fff"></div>
     </div>
   );
 };

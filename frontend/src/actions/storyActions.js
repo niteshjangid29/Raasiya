@@ -6,6 +6,9 @@ import {
   ALL_STORY_REQUEST,
   ALL_STORY_SUCCESS,
   ALL_STORY_FAIL,
+  STORY_DETAILS_FAIL,
+  STORY_DETAILS_REQUEST,
+  STORY_DETAILS_SUCCESS,
 } from "../constants/storyConstants";
 
 import axios from "axios";
@@ -47,6 +50,25 @@ export const createStory = (storyData) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: NEW_STORY_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// get Story Details
+export const getStoryDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: STORY_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/story/${id}`);
+
+    dispatch({
+      type: STORY_DETAILS_SUCCESS,
+      payload: data.story,
+    });
+  } catch (error) {
+    dispatch({
+      type: STORY_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }

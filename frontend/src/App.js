@@ -41,6 +41,7 @@ import Address from "./components/Cart/Address";
 import NewStory from "./components/Story/NewStory";
 import CategoryProducts from "./components/Products/CategoryProducts";
 import Stories from "./components/Story/Stories";
+import StoryDetails from "./components/Story/StoryDetails";
 // import axios from "axios";
 
 function App() {
@@ -213,6 +214,8 @@ function App() {
           />
 
           <Route exact path="/stories" element={<Stories />} />
+
+          <Route exact path="/story/:id" element={<StoryDetails />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

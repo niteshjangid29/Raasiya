@@ -29,3 +29,17 @@ exports.getAllStories = catchAsyncErrors(async (req, res, next) => {
     storiesCount,
   });
 });
+
+// Get Story Details
+exports.getSingleStory = catchAsyncErrors(async (req, res, next) => {
+  const story = await Story.findById(req.params.id);
+
+  if (!story) {
+    return next(new ErrorHandler("Story not found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    story,
+  });
+});

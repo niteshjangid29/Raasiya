@@ -7,6 +7,9 @@ import {
   NEW_STORY_REQUEST,
   NEW_STORY_RESET,
   NEW_STORY_SUCCESS,
+  STORY_DETAILS_FAIL,
+  STORY_DETAILS_REQUEST,
+  STORY_DETAILS_SUCCESS,
 } from "../constants/storyConstants";
 
 export const storiesReducer = (state = { stories: [] }, action) => {
@@ -64,6 +67,37 @@ export const newStoryReducer = (state = { story: {} }, action) => {
         ...state,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const storyDetailsReducer = (state = { story: [] }, action) => {
+  switch (action.type) {
+    case STORY_DETAILS_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+
+    case STORY_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        story: action.payload,
+      };
+
+    case STORY_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
