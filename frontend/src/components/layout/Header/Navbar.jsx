@@ -211,10 +211,7 @@ const Navbar = () => {
                       </li>
                     </ul>
                     <div className="hover-box-right">
-                      <img
-                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
-                        alt="collections"
-                      />
+                      <img src="/navbar_hover1.webp" alt="collections" />
                     </div>
                   </div>
                 </div>
@@ -246,10 +243,7 @@ const Navbar = () => {
                       </li>
                     </ul>
                     <div className="hover-box-right">
-                      <img
-                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
-                        alt="collections"
-                      />
+                      <img src="/navbar_hover1.webp" alt="collections" />
                     </div>
                   </div>
                 </div>
@@ -278,10 +272,7 @@ const Navbar = () => {
                       </li>
                     </ul>
                     <div className="hover-box-right">
-                      <img
-                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
-                        alt="collections"
-                      />
+                      <img src="/navbar_hover1.webp" alt="collections" />
                     </div>
                   </div>
                 </div>
@@ -310,10 +301,7 @@ const Navbar = () => {
                       </li>
                     </ul>
                     <div className="hover-box-right">
-                      <img
-                        src="//www.spaces.in/cdn/shop/files/770-x-900-Bed-copy.jpg?v=1672031920&width=350"
-                        alt="collections"
-                      />
+                      <img src="/navbar_hover1.webp" alt="collections" />
                     </div>
                   </div>
                 </div>

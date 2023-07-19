@@ -36,50 +36,64 @@ const NewStory = () => {
     input.onchange = async () => {
       const file = input.files[0];
 
-      const formData = new FormData();
+      setImages((oldImages) => [...oldImages, file]);
 
-      formData.append("file", file);
-      formData.append("upload_preset", "fo1xfxf9"); // Replace with your Cloudinary upload preset
-
-      try {
-        const response = await axios.post(
-          "https://api.cloudinary.com/v1_1/dihlykute/image/upload", // Replace with your Cloudinary cloud name
-          formData
-        );
-
-        const imageUrl = response.data.secure_url;
-        const publicId = response.data.public_id;
-
-        editor.insertEmbed(editor.getLength(), "image", imageUrl);
-
-        setImages((oldImages) => [
-          ...oldImages,
-          {
-            public_id: publicId,
-            url: imageUrl,
-          },
-        ]);
-      } catch (error) {
-        console.error("Image upload error", error);
-      }
+      editor.insertEmbed(editor.getLength(), "image", "Loading...");
     };
   };
-  console.log(images);
 
-  const createStorySubmitHandler = (e) => {
+  const uploadImagesToCloudinary = async () => {
+    try {
+      const uploadImages = await Promise.all(
+        images.map((image) => {
+          const imageFormData = new FormData();
+          imageFormData.append("file", image);
+          imageFormData.append("upload_preset", "fo1xfxf9");
+
+          return axios.post(
+            "https://api.cloudinary.com/v1_1/dihlykute/image/upload",
+            imageFormData
+          );
+        })
+      );
+
+      return uploadImages.map((response) => {
+        return {
+          url: response.data.secure_url,
+          public_id: response.data.public_id,
+        };
+      });
+    } catch (error) {
+      console.log("Image Upload error", error);
+      return [];
+    }
+  };
+
+  const createStorySubmitHandler = async (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
 
     myForm.set("title", title);
-    myForm.set("content", content.value);
 
-    images.forEach((image, index) => {
+    const editor = quillRef.current.getEditor();
+    let contentHtml = editor.root.innerHTML;
+
+    const processedImages = await uploadImagesToCloudinary();
+    processedImages.forEach((image, index) => {
+      contentHtml = contentHtml.replace(
+        "Loading...", // Placeholder image
+        `${image.url}`
+      );
       myForm.append(`images[${index}][public_id]`, image.public_id);
       myForm.append(`images[${index}][url]`, image.url);
     });
 
+    myForm.set("content", contentHtml);
     dispatch(createStory(myForm));
+    setTitle("");
+    setContent("");
+    setImages([]);
   };
 
   const modules = useMemo(
