@@ -24,6 +24,23 @@ const NewStory = () => {
   const [content, setContent] = useState({ value: null });
   const [title, setTitle] = useState("");
   const [images, setImages] = useState([]);
+  const [thumbnail, setThumbnail] = useState("/slide1.webp");
+  const [thumbnailPreview, setThumbnailPreview] = useState("/slide1.webp");
+
+  const thumbnailDataChange = (e) => {
+    if (e.target.name === "thumbnail") {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setThumbnailPreview(reader.result);
+          setThumbnail(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
 
   const imageHandler = (e) => {
     const editor = quillRef.current.getEditor();
@@ -75,6 +92,7 @@ const NewStory = () => {
     const myForm = new FormData();
 
     myForm.set("title", title);
+    myForm.set("thumbnail", thumbnail);
 
     const editor = quillRef.current.getEditor();
     let contentHtml = editor.root.innerHTML;
@@ -172,6 +190,13 @@ const NewStory = () => {
             placeholder="Write title of the Story"
             onChange={(e) => setTitle(e.target.value)}
           />
+          <input
+            type="file"
+            name="thumbnail"
+            accept="image/*"
+            onChange={thumbnailDataChange}
+          />
+          <img src={thumbnailPreview} alt="Thumbnail Preview" />
           <div>
             <ReactQuill
               theme="snow"

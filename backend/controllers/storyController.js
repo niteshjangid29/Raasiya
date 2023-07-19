@@ -2,14 +2,23 @@ const Story = require("../models/storyModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const cloudinary = require("cloudinary");
+
 // Create a story
 exports.newStory = catchAsyncErrors(async (req, res, next) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.thumbnail, {
+    folder: "stories",
+  });
+
   const { title, content, images } = req.body;
 
   const story = await Story.create({
     title,
     content,
     images,
+    thumbnail: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
     user: req.user._id,
   });
 
@@ -79,6 +88,8 @@ exports.deleteStory = catchAsyncErrors(async (req, res, next) => {
   for (let i = 0; i < story.images.length; i++) {
     await cloudinary.v2.uploader.destroy(story.images[i].public_id);
   }
+
+  await cloudinary.v2.uploader.destroy(story.thumbnail.public_id);
 
   await story.deleteOne();
 

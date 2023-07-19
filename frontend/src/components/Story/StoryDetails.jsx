@@ -31,6 +31,7 @@ const StoryDetails = () => {
           <div className="container">
             <div className="story row">
               <div>{story.title}</div>
+              <img src={story.thumbnail.url} alt="Story Thumbnail" />
               <ReactQuill value={story.content} readOnly theme="bubble" />
             </div>
           </div>

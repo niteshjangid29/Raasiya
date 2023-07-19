@@ -10,6 +10,16 @@ const storySchema = mongoose.Schema({
     type: String,
     require: [true, "Please enter Story Content"],
   },
+  thumbnail: {
+    public_id: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
   images: [
     {
       public_id: {
