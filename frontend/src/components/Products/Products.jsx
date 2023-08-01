@@ -30,6 +30,7 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 10000]);
   const [category, setCategory] = useState("");
+  // const [subCategory, setSubCategory] = useState("");
   const [ratings, setRatings] = useState(0);
 
   const { error: categoryError, categoryPair } = useSelector(
@@ -145,6 +146,18 @@ const Products = () => {
                       onClick={() => setCategory(category.key)}
                     >
                       {category.key}
+                      {/* {category.subCategories && (
+                        <ul className="subCategory">
+                          {category.subCategories.map((subCategory, index) => (
+                            <li
+                              key={index}
+                              onClick={() => setSubCategory(subCategory)}
+                            >
+                              {subCategory}
+                            </li>
+                          ))}
+                        </ul>
+                      )} */}
                     </li>
                   ))}
                 </div>

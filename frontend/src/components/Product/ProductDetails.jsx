@@ -186,7 +186,9 @@ const ProductDetails = () => {
                 <h1 className="product-heading">{product.name}</h1>
                 <div className="product-rating">
                   <Rating {...options} />
-                  <span className="mt-1">{`(${product.numberOfReviews} Review)`}</span>
+                  <span className="mt-1">{`(${product.numberOfReviews} ${
+                    product.numberOfReviews > 1 ? "Reviews" : "Review"
+                  })`}</span>
                 </div>
                 <p className="product-sku">
                   SKU:

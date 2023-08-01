@@ -264,19 +264,28 @@ exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
   const categories = [];
   const categoryImage = [];
-
-  // const pairs = keys.map((key, index) => ({ key, value: values[index] }));
+  const subCategories = [];
 
   for (const product of products) {
     if (!categories.includes(product.category)) {
       categories.push(product.category);
       categoryImage.push(product.images[0].url);
     }
+
+    // Extract subcategory for each product and associate it with the respective category
+    subCategories.push({
+      category: product.category,
+      subCategory: product.subCategory,
+    });
   }
 
   const categoryPair = categories.map((key, index) => ({
     key,
     value: categoryImage[index],
+    // subCategories: [...new Set(subCategories[key])],
+    subCategories: subCategories
+      .filter((sc) => sc.category === key)
+      .map((sc) => sc.subCategory),
   }));
 
   if (!categories) {
@@ -291,19 +300,56 @@ exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
 
 // get products of a Category
 exports.getProductsByCategory = catchAsyncErrors(async (req, res, next) => {
-  const products = await Product.find();
   const category = req.params.category;
 
-  const categoryProducts = products.filter(
-    (product) => product.category === category
-  );
+  const apiFeature = new ApiFeatures(Product.find({ category }), req.query)
+    .search()
+    .filter();
 
-  if (!products) {
-    return next(new ErrorHandler("Products not found for this category", 404));
-  }
+  let categoryProducts = await apiFeature.query;
+  let filteredProductsCount = categoryProducts.length;
+
+  const resultPerPage = 6;
+  apiFeature.pagination(resultPerPage);
+
+  categoryProducts = await apiFeature.query.clone();
+
+  const subCategories = Array.from(
+    new Set(categoryProducts.map((product) => product.subCategory).flat())
+  );
 
   res.status(200).json({
     success: true,
     categoryProducts,
+    resultPerPage,
+    filteredProductsCount,
+    subCategories,
+  });
+});
+
+// get all Prodducts of a SubCategory of a Category
+exports.getProductsBySubCategory = catchAsyncErrors(async (req, res, next) => {
+  const { category, subCategory } = req.params;
+
+  const apiFeature = new ApiFeatures(
+    Product.find({ category, subCategory: subCategory }),
+    req.query
+  )
+    .search()
+    .filter();
+
+  let subCategoryProducts = await apiFeature.query;
+  let filteredProductsCount = subCategoryProducts.length;
+
+  const resultPerPage = 6;
+  apiFeature.pagination(resultPerPage);
+
+  subCategoryProducts = await apiFeature.query.clone();
+
+  res.status(200).json({
+    success: true,
+    subCategoryProducts,
+    resultPerPage,
+    filteredProductsCount,
   });
 });

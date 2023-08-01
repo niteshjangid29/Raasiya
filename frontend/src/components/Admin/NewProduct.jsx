@@ -93,8 +93,8 @@ const NewProduct = () => {
       navigate("/admin/dashboard");
 
       dispatch({ type: NEW_PRODUCT_RESET });
-      dispatch(getAllCategories());
     }
+    dispatch(getAllCategories());
   }, [alert, error, dispatch, success, navigate]);
   return (
     <Fragment>

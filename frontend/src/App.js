@@ -42,6 +42,9 @@ import NewStory from "./components/Story/NewStory";
 import CategoryProducts from "./components/Products/CategoryProducts";
 import Stories from "./components/Story/Stories";
 import StoryDetails from "./components/Story/StoryDetails";
+import NewProduct1 from "./components/Admin1/NewProduct";
+import ProductList1 from "./components/Admin1/ProductList";
+import SubCategoryProducts from "./components/Products/SubCategoryProducts";
 // import axios from "axios";
 
 function App() {
@@ -164,8 +167,18 @@ function App() {
           />
           <Route
             exact
+            path="/admin/products1"
+            element={<ProtectedRoute isAdmin={true} component={ProductList1} />}
+          />
+          <Route
+            exact
             path="/admin/product"
             element={<ProtectedRoute isAdmin={true} component={NewProduct} />}
+          />
+          <Route
+            exact
+            path="/admin/product1"
+            element={<ProtectedRoute isAdmin={true} component={NewProduct1} />}
           />
           <Route
             exact
@@ -206,6 +219,11 @@ function App() {
             exact
             path="/categories/:category"
             element={<CategoryProducts />}
+          />
+          <Route
+            exact
+            path="/categories/:category/:subCategory"
+            element={<SubCategoryProducts />}
           />
 
           <Route

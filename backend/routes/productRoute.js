@@ -11,6 +11,7 @@ const {
   getAllCategories,
   getAdminProducts,
   getProductsByCategory,
+  getProductsBySubCategory,
 } = require("../controllers/productController");
 const router = express.Router();
 const { isAuthenticatedUser, authorizedRoles } = require("../middleware/auth");
@@ -51,5 +52,9 @@ router
 router.route("/categories").get(getAllCategories);
 
 router.route("/categories/:category").get(getProductsByCategory);
+
+router
+  .route("/categories/:category/:subCategory")
+  .get(getProductsBySubCategory);
 
 module.exports = router;

@@ -6,7 +6,7 @@ import { clearErrors, getOrderDetails } from "../../actions/orderActions";
 import { useParams } from "react-router-dom";
 import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
-import { Typography } from "@mui/material";
+// import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const OrderDetails = () => {

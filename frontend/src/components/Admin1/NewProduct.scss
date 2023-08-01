@@ -1,0 +1,102 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+
+.logo-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+
+    img{
+        width: 100px;
+    }
+}
+a{
+    text-decoration: none !important;
+    color: $black-color;
+}
+.create-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    background: #ebebeb;
+
+    >div{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .product-form{
+        margin-top: 2rem;
+        width: min(100%, 52rem);
+        display: flex;
+        padding: 2rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: $white-color;
+
+        >div{
+            display: flex;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .productImageBox{
+            display: flex;
+            align-items: center;
+
+            label{
+                white-space: nowrap;
+                height: fit-content;
+                margin: 0.2rem 0.5rem;
+            }
+            .imagePreview{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #ccc;
+                margin-bottom: 1rem;
+                overflow-x: scroll;
+
+    
+                img{
+                    width: 5rem;
+                    margin: 0 0.4rem;
+                    object-fit: cover;
+                }
+            }
+        }
+
+    }
+}
+
+.all-products{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        svg {
+            color: $black-color;
+        }
+    }
+
+    h1{
+        margin: 1rem 0 1.5rem;
+        font-size: 2rem;
+    }
+}

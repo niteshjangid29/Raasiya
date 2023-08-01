@@ -47,6 +47,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter product category"],
   },
+  subCategory: {
+    type: String,
+    required: [true, "Please enter product subCategory"],
+  },
   collections: {
     type: String,
     required: [true, "Please enter collections name"],
@@ -89,7 +93,7 @@ const productSchema = mongoose.Schema({
   registeredAddress: {
     type: String,
     default:
-      "Om ShivAmbika Co-Op Hsg Soc, Kalina, Santacruz East, Mumbai-400098",
+      "Unit No. CA/4, 2nd Floor, Suyog Industrial Estate, LBS Marg, Vikhroli West, Mumbai - 400083",
   },
   packedBy: {
     type: String,

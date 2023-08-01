@@ -32,7 +32,7 @@ const Navbar = () => {
     { name: "My Account", func: account },
     { name: "My Orders", func: orders },
     { name: `Cart (${cartItems.length})`, func: cart },
-    { name: "My Logout", func: logOutUser },
+    { name: "Logout", func: logOutUser },
   ];
 
   if (isAuthenticated === true) {
@@ -162,7 +162,9 @@ const Navbar = () => {
                   <div>
                     <ul className="hover-box-left">
                       <li>
-                        <p>BED SHEET</p>
+                        <p>
+                          <Link to="/categories/Bedsheet">BEDSHEET</Link>
+                        </p>
                         <ul>
                           <li>
                             <Link to="/">SINGLE</Link>
@@ -307,7 +309,7 @@ const Navbar = () => {
                 </div>
               </li>
               <li>
-                <Link to="/">Stories</Link>
+                <Link to="/stories">Stories</Link>
               </li>
             </ul>
             <ul className="nav-down-2">

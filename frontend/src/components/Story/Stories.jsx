@@ -28,12 +28,14 @@ const Stories = () => {
         <Fragment>
           <div className="products-box">
             <h2 className="heading productHeading">{storiesCount} Stories</h2>
-            <div className="products-box-1">
-              <div className="products">
-                {stories &&
-                  stories.map((story) => (
-                    <BlogCard key={story._id} story={story} />
-                  ))}
+            <div>
+              <div className="products-box-1">
+                <div className="products">
+                  {stories &&
+                    stories.map((story) => (
+                      <BlogCard key={story._id} story={story} />
+                    ))}
+                </div>
               </div>
             </div>
           </div>

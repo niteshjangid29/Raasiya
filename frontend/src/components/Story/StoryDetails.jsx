@@ -30,9 +30,22 @@ const StoryDetails = () => {
         <Fragment>
           <div className="container">
             <div className="story row">
-              <div>{story.title}</div>
-              <img src={story.thumbnail.url} alt="Story Thumbnail" />
-              <ReactQuill value={story.content} readOnly theme="bubble" />
+              <h1 className="story-title">{story.title}</h1>
+              <hr />
+              <div className="story-thumbnail">
+                {story.thumbnail && (
+                  <img
+                    src={story.thumbnail.url}
+                    alt={story.thumbnail.public_id}
+                  />
+                )}
+              </div>
+              <ReactQuill
+                value={story.content}
+                readOnly
+                theme="bubble"
+                className="story-content"
+              />
             </div>
           </div>
         </Fragment>

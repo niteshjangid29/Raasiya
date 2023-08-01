@@ -38,6 +38,9 @@ import {
   ALL_CATEGORIES_REQUEST,
   ALL_CATEGORIES_SUCCESS,
   ALL_CATEGORIES_FAIL,
+  SUB_CATEGORY_PRODUCTS_FAIL,
+  SUB_CATEGORY_PRODUCTS_SUCCESS,
+  SUB_CATEGORY_PRODUCTS_REQUEST,
 } from "../constants/productConstants";
 
 export const productsReducer = (state = { products: [] }, action) => {
@@ -291,7 +294,7 @@ export const reviewReducer = (state = {}, action) => {
 export const categoryProductsReducer = (
   state = {
     categoryProducts: [],
-    categoryPair: [[], []],
+    categoryPair: [[], [], []],
   },
   action
 ) => {
@@ -300,16 +303,20 @@ export const categoryProductsReducer = (
       return {
         loading: true,
         categoryProducts: [],
+        categoryPair: [[], [], []],
       };
     case ALL_CATEGORIES_REQUEST:
       return {
         loading: true,
-        categoryPair: [[], []],
+        categoryPair: [[], [], []],
       };
     case CATEGORY_PRODUCTS_SUCCESS:
       return {
         loading: false,
         categoryProducts: action.payload.categoryProducts,
+        resultPerPage: action.payload.resultPerPage,
+        filteredProductsCount: action.payload.filteredProductsCount,
+        subCategories: action.payload.subCategories,
       };
     case ALL_CATEGORIES_SUCCESS:
       return {
@@ -329,6 +336,42 @@ export const categoryProductsReducer = (
         error: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const subCategoryProductsReducer = (
+  state = {
+    subCategoryProducts: [],
+  },
+  action
+) => {
+  switch (action.type) {
+    case SUB_CATEGORY_PRODUCTS_REQUEST:
+      return {
+        loading: true,
+        subCategoryProducts: [],
+      };
+
+    case SUB_CATEGORY_PRODUCTS_SUCCESS:
+      return {
+        loading: false,
+        subCategoryProducts: action.payload.subCategoryProducts,
+        resultPerPage: action.payload.resultPerPage,
+        filteredProductsCount: action.payload.filteredProductsCount,
+      };
+
+    case SUB_CATEGORY_PRODUCTS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }

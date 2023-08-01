@@ -28,17 +28,17 @@ const BlogCard = ({ story }) => {
       </div> */}
       <div className="blogImage">
         <Link to={`/story/${story._id}`}>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" alt="" />
+          <img src={story.thumbnail.url} alt={story.thumbnail.public_id} />
         </Link>
       </div>
       <div className="blogContent">
         <Link to={`/story/${story._id}`}>
           <h2>{story.title}</h2>
         </Link>
-        <div
+        {/* <div
           className="xyz"
           dangerouslySetInnerHTML={{ __html: story.content }}
-        ></div>
+        ></div> */}
         <Link to={`/story/${story._id}`} className="read-more">
           Read More
         </Link>

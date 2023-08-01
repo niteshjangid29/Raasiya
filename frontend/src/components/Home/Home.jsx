@@ -19,6 +19,7 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
 import BlogCard from "../Story/BlogCard";
 import CategoryCard from "./CategoryCard";
+import { getStories } from "../../actions/storyActions";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,10 +27,13 @@ const Home = () => {
 
   const { loading, error, products } = useSelector((state) => state.products);
   const { categoryPair } = useSelector((state) => state.categoryProducts);
+  const { stories } = useSelector((state) => state.stories);
 
   let bestSellerProducts = 0;
+  let homePageStories = 0;
 
   products && (bestSellerProducts = products.slice(0, 4));
+  stories && (homePageStories = stories.slice(0, 4));
 
   useEffect(() => {
     if (error) {
@@ -37,6 +41,7 @@ const Home = () => {
       dispatch(clearErrors());
     }
     dispatch(getProduct());
+    dispatch(getStories());
     dispatch(getAllCategories());
   }, [dispatch, alert, error]);
   return (
@@ -109,38 +114,14 @@ const Home = () => {
             <div className="blogs container">
               <h2 className="heading">Stories</h2>
               <div className="blogBox">
-                {/* <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard /> */}
+                {homePageStories &&
+                  homePageStories.map((story) => (
+                    <BlogCard story={story} key={story._id} />
+                  ))}
               </div>
               <Link to="/stories" className="myBtn">
                 View All Stories
               </Link>
-              {/* <Swiper
-                slidesPerView={4}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[Pagination]}
-                className="blogSwiper"
-              >
-                <SwiperSlide>
-                  <BlogCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <BlogCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <BlogCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <BlogCard />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <BlogCard />
-                </SwiperSlide>
-              </Swiper> */}
             </div>
           </div>
         </Fragment>

@@ -35,6 +35,9 @@ import {
   ALL_CATEGORIES_REQUEST,
   ALL_CATEGORIES_SUCCESS,
   ALL_CATEGORIES_FAIL,
+  SUB_CATEGORY_PRODUCTS_REQUEST,
+  SUB_CATEGORY_PRODUCTS_SUCCESS,
+  SUB_CATEGORY_PRODUCTS_FAIL,
 } from "../constants/productConstants";
 
 export const getProduct =
@@ -244,20 +247,50 @@ export const deleteReview = (reviewId, productId) => async (dispatch) => {
 };
 
 // get products of a Category
-export const getAllCategoryProducts = (category) => async (dispatch) => {
-  try {
-    dispatch({ type: CATEGORY_PRODUCTS_REQUEST });
+export const getAllCategoryProducts =
+  (category, currentPage = 1, price = [0, 100000], ratings = 0) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: CATEGORY_PRODUCTS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/categories/${category}`);
+      const link = `/api/v1/categories/${category}?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-    dispatch({ type: CATEGORY_PRODUCTS_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: CATEGORY_PRODUCTS_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+      const { data } = await axios.get(link);
+
+      dispatch({ type: CATEGORY_PRODUCTS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: CATEGORY_PRODUCTS_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+// get products of a SubCategory of a Category
+export const getAllSubCategoryProducts =
+  (
+    category,
+    subCategory = "",
+    currentPage = 1,
+    price = [0, 100000],
+    ratings = 0
+  ) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: SUB_CATEGORY_PRODUCTS_REQUEST });
+
+      const link = `/api/v1/categories/${category}/${subCategory}?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+
+      const { data } = await axios.get(link);
+
+      dispatch({ type: SUB_CATEGORY_PRODUCTS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: SUB_CATEGORY_PRODUCTS_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 // get All Categories
 export const getAllCategories = () => async (dispatch) => {
   try {

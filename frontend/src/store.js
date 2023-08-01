@@ -14,6 +14,7 @@ import {
   productReviewsReducer,
   productsReducer,
   reviewReducer,
+  subCategoryProductsReducer,
 } from "./reducers/productReducer";
 import {
   allUsersReducer,
@@ -59,6 +60,7 @@ const reducer = combineReducers({
   newStory: newStoryReducer,
   stories: storiesReducer,
   storyDetails: storyDetailsReducer,
+  subCategoryProducts: subCategoryProductsReducer,
 });
 
 let initialState = {

@@ -7,7 +7,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaPhoneAlt,
-  FaPinterest,
   FaRegCopyright,
 } from "react-icons/fa";
 import { MdLocationPin } from "react-icons/md";
@@ -64,37 +63,50 @@ const Footer = () => {
             <h3>Contact Us</h3>
             <ul className="footer-contact">
               <li>
-                <a href="tel:+917738771094">
+                <a href="tel:+918591950399">
                   <FaPhoneAlt />
-                  +91 77387 71094
+                  +91 85919 50399
                 </a>
               </li>
               <li>
-                <a href="mailto:founders@raasiya.com">
+                <a href="mailto:customercare@raasiya.com">
                   <FaEnvelope />
-                  founders@raasiya.com
+                  customercare@raasiya.com
                 </a>
               </li>
               <li>
                 <Link to="/">
                   <MdLocationPin fontSize="1rem" />
-                  Varthur Hobli, Bengaluru – 560103, India
+                  Unit No. CA/4, 2nd Floor, Suyog Industrial Estate, LBS Marg,
+                  Vikhroli West, Mumbai - 400 083
                 </Link>
               </li>
             </ul>
             <div className="social-media">
-              <Link to="/">
+              <a
+                href="https://instagram.com/raasiyahomefashion?igshid=MzRlODBiNWFlZA=="
+                target="_blank"
+                rel="noreferrer"
+              >
                 <FaInstagram />
-              </Link>
-              <Link to="/">
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100092622751991&mibextid=LQQJ4d"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <FaFacebookF />
-              </Link>
-              <Link to="/">
+              </a>
+              <a
+                href="https://www.linkedin.com/company/raasiya-home-fashion"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <FaLinkedinIn />
-              </Link>
-              <Link to="/">
+              </a>
+              {/* <Link to="/">
                 <FaPinterest />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

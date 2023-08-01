@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect } from "react";
 import "./MyOrders.scss";
-import { DataGrid } from "@mui/x-data-grid";
+// import { DataGrid } from "@mui/x-data-grid";
 import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../layout/Loader/Loader";
-import { Typography } from "@mui/material";
+// import { Typography } from "@mui/material";
 import { useAlert } from "react-alert";
 import { clearErrors, myOrders } from "../../actions/orderActions";
 import { Link } from "react-router-dom";
-import { MdLaunch } from "react-icons/md";
+// import { MdLaunch } from "react-icons/md";
 
 const MyOrders = () => {
   const dispatch = useDispatch();

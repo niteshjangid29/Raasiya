@@ -37,7 +37,7 @@ const Header = () => {
     { name: "My Account", func: account },
     { name: "My Orders", func: orders },
     { name: `Cart (${cartItems.length})`, func: cart },
-    { name: "My Logout", func: logOutUser },
+    { name: "Logout", func: logOutUser },
   ];
 
   if (isAuthenticated) {

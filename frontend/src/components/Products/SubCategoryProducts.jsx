@@ -1,39 +1,43 @@
 import React, { Fragment, useEffect } from "react";
 import "./Products.scss";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
+import { Link, useParams } from "react-router-dom";
 import {
   clearErrors,
-  getAllCategoryProducts,
+  getAllSubCategoryProducts,
 } from "../../actions/productActions";
-import { Link, useParams } from "react-router-dom";
-import ProductCard from "../Product/ProductCard";
-import { useAlert } from "react-alert";
 import Loader from "../layout/Loader/Loader";
 import { Slider } from "@mui/material";
 import Pagination from "react-js-pagination";
+import ProductCard from "../Product/ProductCard";
 
-const CategoryProducts = () => {
+const SubCategoryProducts = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const { category } = useParams();
+  const { category, subCategory } = useParams();
 
   const {
-    subCategories,
-    categoryProducts,
+    subCategoryProducts,
     resultPerPage,
     filteredProductsCount,
     loading,
     error,
-  } = useSelector((state) => state.categoryProducts);
-
+  } = useSelector((state) => state.subCategoryProducts);
+  //   const {
+  //     subCategories,
+  //     categoryProducts,
+  //     resultPerPage,
+  //     filteredProductsCount,
+  //     loading,
+  //     error,
+  //   } = useSelector((state) => state.categoryProducts);
   const [priceRange, setPriceRange] = React.useState([0, 10000]);
   const [ratings, setRatings] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
-
   const handlePriceChange = (e, newPrice) => {
     setPriceRange(newPrice);
   };
-
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
@@ -43,9 +47,24 @@ const CategoryProducts = () => {
       dispatch(clearErrors());
     }
     dispatch(
-      getAllCategoryProducts(category, currentPage, priceRange, ratings)
+      getAllSubCategoryProducts(
+        category,
+        subCategory,
+        currentPage,
+        priceRange,
+        ratings
+      )
     );
-  }, [dispatch, category, error, alert, ratings, currentPage, priceRange]);
+  }, [
+    dispatch,
+    error,
+    alert,
+    category,
+    subCategory,
+    currentPage,
+    priceRange,
+    ratings,
+  ]);
   return (
     <Fragment>
       {loading ? (
@@ -54,7 +73,9 @@ const CategoryProducts = () => {
         <Fragment>
           <div className="products-box">
             <h2 className="heading productHeading">
-              {filteredProductsCount} Products ({category})
+              {filteredProductsCount} Products (
+              <Link to={`/categories/${category}`}>{category}</Link> /{" "}
+              {subCategory})
             </h2>
             <div>
               <div className="filter">
@@ -71,7 +92,7 @@ const CategoryProducts = () => {
                 </div>
                 <div>
                   <p>{category}</p>
-                  <ul className="subCategory">
+                  {/* <ul className="subCategory">
                     <li>
                       <Link to={`/categories/${category}`}>All</Link>
                     </li>
@@ -83,7 +104,7 @@ const CategoryProducts = () => {
                           </Link>
                         </li>
                       ))}
-                  </ul>
+                  </ul> */}
                 </div>
                 <div>
                   <p>Rating Above</p>
@@ -101,12 +122,11 @@ const CategoryProducts = () => {
               </div>
               <div className="products-box-1">
                 <div className="products">
-                  {categoryProducts &&
-                    categoryProducts.map((product) => (
+                  {subCategoryProducts &&
+                    subCategoryProducts.map((product) => (
                       <ProductCard key={product._id} product={product} />
                     ))}
                 </div>
-
                 {resultPerPage < filteredProductsCount && (
                   <div className="pagination">
                     <Pagination
@@ -134,4 +154,4 @@ const CategoryProducts = () => {
   );
 };
 
-export default CategoryProducts;
+export default SubCategoryProducts;
