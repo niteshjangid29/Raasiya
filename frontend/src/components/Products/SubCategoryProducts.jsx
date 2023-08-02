@@ -91,7 +91,9 @@ const SubCategoryProducts = () => {
                   />
                 </div>
                 <div>
-                  <p>{category}</p>
+                  <p>
+                    <Link to={`/categories/${category}`}>{category}</Link>
+                  </p>
                   {/* <ul className="subCategory">
                     <li>
                       <Link to={`/categories/${category}`}>All</Link>

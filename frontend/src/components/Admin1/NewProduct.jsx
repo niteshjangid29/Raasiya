@@ -21,6 +21,7 @@ import {
 } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router";
+import { Form } from "react-router-dom";
 
 const NewProduct1 = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,24 @@ const NewProduct1 = () => {
   );
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
+
+  const [filteredSubCategories, setFilteredSubCategories] = useState([]);
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+
+    const selectedCategoryObj = categoryPair.find(
+      (catObj) => catObj.key === selectedCategory
+    );
+
+    if (selectedCategoryObj) {
+      setFilteredSubCategories(selectedCategoryObj.subCategories);
+    } else {
+      setFilteredSubCategories([]);
+    }
+
+    setCategory(selectedCategory);
+  };
 
   const productImagesChangeHandler = (e) => {
     const files = Array.from(e.target.files);
@@ -81,6 +100,11 @@ const NewProduct1 = () => {
       myForm.set("category", newCategory);
     } else {
       myForm.set("category", category);
+    }
+    if (subCategory === "addNewSubCategory") {
+      myForm.set("subCategory", newSubCategory);
+    } else {
+      myForm.set("subCategory", subCategory);
     }
 
     myForm.set("name", name);
@@ -196,7 +220,7 @@ const NewProduct1 = () => {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={category}
-                  onChange={(e) => setCategory(e.target.value)}
+                  onChange={handleCategoryChange}
                   label="Category"
                 >
                   {categoryPair.map((cat) => (
@@ -214,25 +238,27 @@ const NewProduct1 = () => {
                   label="Add New Category"
                 />
               )}
-              <FormControl>
-                <InputLabel id="demo-simple-select-label">
-                  Sub Category
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={subCategory}
-                  onChange={(e) => setSubCategory(e.target.value)}
-                  label="Category"
-                >
-                  {categoryPair.map((subCat) => (
-                    <MenuItem value={subCat.key}>{subCat.key}</MenuItem>
-                  ))}
-                  <MenuItem value="addNewSubCategory">
-                    + Add New Sub Category
-                  </MenuItem>
-                </Select>
-              </FormControl>
+              {category !== "addNewCategory" && (
+                <FormControl>
+                  <InputLabel id="demo-simple-select-label">
+                    Sub Category
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={subCategory}
+                    onChange={(e) => setSubCategory(e.target.value)}
+                    label="Category"
+                  >
+                    {filteredSubCategories.map((subCat) => (
+                      <MenuItem value={subCat}>{subCat}</MenuItem>
+                    ))}
+                    <MenuItem value="addNewSubCategory">
+                      + Add New Sub Category
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              )}
               {subCategory === "addNewSubCategory" && (
                 <TextField
                   fullWidth

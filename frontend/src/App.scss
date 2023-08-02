@@ -35,6 +35,11 @@ body{
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
+::selection{
+  background: $brown-color;
+  color: $white-color;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

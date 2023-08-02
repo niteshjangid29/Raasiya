@@ -276,6 +276,10 @@ const ProductDetails = () => {
                     <strong>Category:</strong>
                     {product.category}
                   </p>
+                  <p>
+                    <strong>Sub-Category:</strong>
+                    {product.subCategory}
+                  </p>
                 </div>
               </div>
             </div>

@@ -264,7 +264,7 @@ exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
   const products = await Product.find();
   const categories = [];
   const categoryImage = [];
-  const subCategories = [];
+  const subCategoriesMap = new Map();
 
   for (const product of products) {
     if (!categories.includes(product.category)) {
@@ -272,20 +272,20 @@ exports.getAllCategories = catchAsyncErrors(async (req, res, next) => {
       categoryImage.push(product.images[0].url);
     }
 
-    // Extract subcategory for each product and associate it with the respective category
-    subCategories.push({
-      category: product.category,
-      subCategory: product.subCategory,
-    });
+    const { category, subCategory } = product;
+    if (!subCategoriesMap.has(category)) {
+      subCategoriesMap.set(category, new Set([subCategory]));
+    } else {
+      subCategoriesMap.get(category).add(subCategory);
+    }
   }
 
   const categoryPair = categories.map((key, index) => ({
     key,
     value: categoryImage[index],
-    // subCategories: [...new Set(subCategories[key])],
-    subCategories: subCategories
-      .filter((sc) => sc.category === key)
-      .map((sc) => sc.subCategory),
+
+    // Convert Set back to an array to remove duplicates
+    subCategories: Array.from(subCategoriesMap.get(key)),
   }));
 
   if (!categories) {
