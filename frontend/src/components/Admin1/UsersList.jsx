@@ -1,32 +1,31 @@
-import React, { Fragment, useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
-import "./NewProduct.scss";
+import React, { Fragment, useEffect } from "react";
+import Loader from "../layout/Loader/Loader";
 import {
   Box,
-  Button,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
   TableContainer,
+  Table,
   TableHead,
-  TablePagination,
   TableRow,
+  TableCell,
   styled,
   tableCellClasses,
+  TableBody,
+  TablePagination,
+  Button,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import {
   clearErrors,
-  deleteProduct,
-  getAdminProduct,
-} from "../../actions/productActions";
+  deleteUser,
+  getAllUsers,
+} from "../../actions/userActions";
+import { Link, useNavigate } from "react-router-dom";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { BsBoxArrowUpRight } from "react-icons/bs";
-import Loader from "../layout/Loader/Loader";
-import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
+import { DELETE_USER_RESET } from "../../constants/userConstants";
+import { getAllOrders } from "../../actions/orderActions";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,22 +47,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ProductList1 = () => {
+const UsersList1 = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { loading, error, products } = useSelector((state) => state.products);
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.product
-  );
+  const { loading, error, users } = useSelector((state) => state.allUsers);
+  const {
+    error: deleteError,
+    isDeleted,
+    message,
+  } = useSelector((state) => state.profile);
+  const { orders } = useSelector((state) => state.allOrders);
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
-  };
-
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -74,48 +72,55 @@ const ProductList1 = () => {
     setPage(0);
   };
 
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id));
+  };
+
   const columns = [
-    { id: "id", label: "Product ID", minWidth: 200, flex: 0.5 },
+    { id: "id", label: "User ID", minWidth: 200, flex: 1 },
     {
       id: "name",
       label: "Name",
-      minWidth: 350,
+      minWidth: 200,
       flex: 1,
     },
     {
-      id: "stock",
-      label: "Stock",
-      minWidth: 150,
-      flex: 0.3,
+      id: "email",
+      label: "Email",
+      minWidth: 250,
+      flex: 1,
     },
     {
-      id: "price",
-      label: "Price",
+      id: "role",
+      label: "Role",
       minWidth: 170,
-      flex: 0.4,
+      flex: 1,
+    },
+    {
+      id: "orders",
+      label: "Orders",
+      minWidth: 150,
+      flex: 1,
     },
     {
       id: "actions",
       label: "Actions",
-      minWidth: 230,
-      flex: 0.4,
+      minWidth: 200,
+      flex: 1,
     },
   ];
 
-  const renderCell = (item) => {
-    const product_id = item._id;
+  const renderCell = (user) => {
+    const user_id = user._id;
     return (
       <Fragment>
-        <Link to={`/product/${product_id}`}>
-          <Button>{<BsBoxArrowUpRight />}</Button>
-        </Link>
-        <Link to={`/admin/product1/${product_id}`}>
+        <Link to={`/admin/user1/${user_id}`}>
           <Button>
             <MdEdit />
           </Button>
         </Link>
 
-        <Button onClick={() => deleteProductHandler(product_id)}>
+        <Button onClick={() => deleteUserHandler(user_id)}>
           <MdDelete />
         </Button>
       </Fragment>
@@ -124,14 +129,17 @@ const ProductList1 = () => {
 
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  users &&
+    users.forEach((user) => {
       rows.unshift({
-        id: item._id,
-        name: item.name,
-        stock: item.Stock,
-        price: `Rs. ${item.price}`,
-        actions: renderCell(item),
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        orders: orders
+          ? orders.filter((order) => order.user === user._id).length
+          : "Loading",
+        actions: renderCell(user),
       });
     });
 
@@ -145,13 +153,13 @@ const ProductList1 = () => {
       dispatch(clearErrors());
     }
     if (isDeleted) {
-      alert.success("Product deleted successfully");
-      navigate("/admin/products1");
-      dispatch({ type: DELETE_PRODUCT_RESET });
+      alert.success(message);
+      navigate("/admin/users1");
+      dispatch({ type: DELETE_USER_RESET });
     }
-    dispatch(getAdminProduct());
-  }, [dispatch, alert, error, deleteError, isDeleted, navigate]);
-
+    dispatch(getAllUsers());
+    dispatch(getAllOrders());
+  }, [dispatch, alert, error, deleteError, isDeleted, message, navigate]);
   return (
     <Fragment>
       <Box sx={{ display: "flex" }}>
@@ -161,7 +169,7 @@ const ProductList1 = () => {
           sx={{ flexGrow: 1, p: 3 }}
           className="all-products"
         >
-          <h1 className="heading">Products List</h1>
+          <h1 className="heading">Users List</h1>
           <Fragment>
             {loading ? (
               <Loader />
@@ -174,7 +182,9 @@ const ProductList1 = () => {
                         {columns.map((column) => (
                           <StyledTableCell
                             key={column.id}
-                            align={column.align}
+                            align={
+                              column.label === "Actions" ? "center" : "left"
+                            }
                             style={{ minWidth: column.minWidth }}
                           >
                             {column.label}
@@ -182,6 +192,7 @@ const ProductList1 = () => {
                         ))}
                       </StyledTableRow>
                     </TableHead>
+
                     <TableBody>
                       {rows
                         .slice(
@@ -201,28 +212,36 @@ const ProductList1 = () => {
                                 return (
                                   <TableCell
                                     key={column.id}
-                                    align={column.align}
+                                    align={
+                                      column.label === "Actions"
+                                        ? "center"
+                                        : "left"
+                                    }
                                   >
-                                    {column.id === "stock" ? (
+                                    {column.id === "role" ? (
                                       <span
                                         className={
-                                          row[column.id] === 0
+                                          value === "superadmin"
+                                            ? "greenColor"
+                                            : value === "admin"
+                                            ? "redColor"
+                                            : "blackColor"
+                                        }
+                                      >
+                                        {value}
+                                      </span>
+                                    ) : column.id === "orders" ? (
+                                      <span
+                                        className={
+                                          value === 0
                                             ? "redColor"
                                             : "greenColor"
                                         }
                                       >
-                                        {column.format &&
-                                        typeof value === "number"
-                                          ? column.format(value)
-                                          : value}
+                                        {value}
                                       </span>
                                     ) : (
-                                      <span className="blackColor">
-                                        {column.format &&
-                                        typeof value === "number"
-                                          ? column.format(value)
-                                          : value}
-                                      </span>
+                                      <span>{value}</span>
                                     )}
                                   </TableCell>
                                 );
@@ -251,4 +270,4 @@ const ProductList1 = () => {
   );
 };
 
-export default ProductList1;
+export default UsersList1;

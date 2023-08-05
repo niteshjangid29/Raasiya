@@ -9,6 +9,9 @@ import {
   STORY_DETAILS_FAIL,
   STORY_DETAILS_REQUEST,
   STORY_DETAILS_SUCCESS,
+  DELETE_STORY_REQUEST,
+  DELETE_STORY_SUCCESS,
+  DELETE_STORY_FAIL,
 } from "../constants/storyConstants";
 
 import axios from "axios";
@@ -69,6 +72,25 @@ export const getStoryDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: STORY_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// delete Story --Admin
+export const deleteStory = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_STORY_REQUEST });
+
+    const { data } = await axios.delete(`/api/v1/admin/story/${id}`);
+
+    dispatch({
+      type: DELETE_STORY_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_STORY_FAIL,
       payload: error.response.data.message,
     });
   }

@@ -54,12 +54,14 @@ const Sidebar = () => {
         </div>
         <Box sx={{ overflow: "auto" }}>
           <List>
-            <ListItemButton>
-              <ListItemIcon>
-                <AiOutlineHome />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
+            <Link to="/admin/dashboard1" className="link">
+              <ListItemButton>
+                <ListItemIcon>
+                  <AiOutlineHome />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItemButton>
+            </Link>
             <ListItemButton
               onClick={() =>
                 setOpen((prevState) => ({
@@ -71,17 +73,19 @@ const Sidebar = () => {
               <ListItemIcon>
                 <MdOutlinePeopleAlt />
               </ListItemIcon>
-              <ListItemText primary="Customers" />
+              <ListItemText primary="Users" />
               {open.customers ? <MdExpandLess /> : <MdExpandMore />}
             </ListItemButton>
             <Collapse in={open.customers} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <MdPeopleAlt />
-                  </ListItemIcon>
-                  <ListItemText primary="All" />
-                </ListItemButton>
+                <Link to="/admin/users1" className="link">
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <MdPeopleAlt />
+                    </ListItemIcon>
+                    <ListItemText primary="All" />
+                  </ListItemButton>
+                </Link>
               </List>
             </Collapse>
             <ListItemButton
@@ -134,26 +138,32 @@ const Sidebar = () => {
             </ListItemButton>
             <Collapse in={open.stories} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <FaBlogger />
-                  </ListItemIcon>
-                  <ListItemText primary="All" />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <AiOutlinePlus />
-                  </ListItemIcon>
-                  <ListItemText primary="Create" />
-                </ListItemButton>
+                <Link to="/admin/stories">
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <FaBlogger />
+                    </ListItemIcon>
+                    <ListItemText primary="All" />
+                  </ListItemButton>
+                </Link>
+                <Link to="/admin/story">
+                  <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <AiOutlinePlus />
+                    </ListItemIcon>
+                    <ListItemText primary="Create" />
+                  </ListItemButton>
+                </Link>
               </List>
             </Collapse>
-            <ListItemButton>
-              <ListItemIcon>
-                <MdOutlineShoppingCart />
-              </ListItemIcon>
-              <ListItemText primary="Orders" />
-            </ListItemButton>
+            <Link to="/admin/orders1" className="link">
+              <ListItemButton>
+                <ListItemIcon>
+                  <MdOutlineShoppingCart />
+                </ListItemIcon>
+                <ListItemText primary="Orders" />
+              </ListItemButton>
+            </Link>
             <ListItemButton>
               <ListItemIcon>
                 <MdOutlineRateReview />

@@ -84,6 +84,11 @@ $search-color: #F0EBE8;
 
 .productHeading{
     margin: 1rem auto 2rem;
+
+    a{
+        text-decoration: underline !important;
+        color: $brown-color !important;
+    }
 }
 
 .products{

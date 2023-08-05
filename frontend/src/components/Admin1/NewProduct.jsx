@@ -21,7 +21,6 @@ import {
 } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 import { useNavigate } from "react-router";
-import { Form } from "react-router-dom";
 
 const NewProduct1 = () => {
   const dispatch = useDispatch();
@@ -89,8 +88,6 @@ const NewProduct1 = () => {
     });
   };
 
-  console.log("old " + category);
-  console.log("new " + newCategory);
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
 

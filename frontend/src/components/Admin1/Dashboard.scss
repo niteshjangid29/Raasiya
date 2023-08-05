@@ -1,0 +1,66 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+
+.myDashboard{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    .total-amount{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        background: $brown-color;
+        color: $white-color;
+        padding: 0.5rem 0;
+        border-radius: 0.5rem;
+
+        p{
+            margin: 0;
+            padding: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+    }
+
+    .total-items{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        margin: 1.5rem 0;
+
+        a{
+            display: flex;
+            width: 10rem;
+            height: 10rem;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 50%;
+            background: $green-color;
+        }
+        a:nth-child(2) {
+            background: $yellow-color;
+        }
+        a:nth-child(3) {
+            background: $blue-color;
+        }
+        a:last-child {
+            background: $black-color;
+        }
+
+        p{
+            margin: 0;
+            font-size: 1.2rem;
+            color: $white-color;
+        }
+    }
+}

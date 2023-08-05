@@ -1,0 +1,81 @@
+$brown-color: #622E10;
+$green-color: #306431;
+$blue-color: #78BAB9;
+$black-color: #333333;
+$yellow-color: #F4D54B;
+$grey-color: #C0C49B;
+$white-color: #ffffff;
+
+.processOrder{
+    // background: red;
+    width: 100%;
+
+    .cartBag{
+        padding: 1rem 0;
+
+        // .cartBagPayment{
+        //     // background: red;
+        // }
+        .address{
+            display: flex;
+            flex-direction: column;
+            text-transform: capitalize;
+        }
+        strong{
+            font-weight: 500;
+        }
+
+        .orderItems{
+            // background: red;
+            
+            .orderItem{
+                background: $white-color;
+                padding: 0.5rem;
+                margin: 0.5rem 0;
+                display: flex;
+                border: 1px solid $grey-color;
+
+                img{
+                    width: 6rem;
+                }
+
+                .right{
+                    padding: 0 0.5rem;
+
+                    p{
+                        margin: 0;
+                        
+                        strong{
+                            font-weight: 500;
+                            color: $brown-color;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+            }
+        }
+        .payment-info{
+            display: flex;
+            flex-direction: column;
+            // background: red;
+
+            // p{
+            //     margin: 0;
+            // }
+        }
+        .update-order{
+            margin: 1rem 0;
+
+            form{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                button{
+                    white-space: nowrap;
+                    margin: 0 0.5rem;
+                }
+            }
+        }
+    }
+}

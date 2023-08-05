@@ -35,6 +35,7 @@ import {
   newStoryReducer,
   storiesReducer,
   storyDetailsReducer,
+  storyReducer,
 } from "./reducers/storyReducer";
 
 const reducer = combineReducers({
@@ -61,6 +62,7 @@ const reducer = combineReducers({
   stories: storiesReducer,
   storyDetails: storyDetailsReducer,
   subCategoryProducts: subCategoryProductsReducer,
+  story: storyReducer,
 });
 
 let initialState = {

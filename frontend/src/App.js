@@ -38,13 +38,20 @@ import ProductReview from "./components/Admin/ProductReview";
 import NotFound from "./components/layout/Not Found/NotFound";
 import Cart1 from "./components/Cart/Cart1";
 import Address from "./components/Cart/Address";
-import NewStory from "./components/Story/NewStory";
+import NewStory from "./components/Admin1/NewStory";
 import CategoryProducts from "./components/Products/CategoryProducts";
 import Stories from "./components/Story/Stories";
 import StoryDetails from "./components/Story/StoryDetails";
 import NewProduct1 from "./components/Admin1/NewProduct";
 import ProductList1 from "./components/Admin1/ProductList";
 import SubCategoryProducts from "./components/Products/SubCategoryProducts";
+import UsersList1 from "./components/Admin1/UsersList";
+import OrdersList1 from "./components/Admin1/OrdersList";
+import UpdateProduct1 from "./components/Admin1/UpdateProduct";
+import UpdateUser1 from "./components/Admin1/UpdateUser";
+import Stories1 from "./components/Admin1/Stories";
+import ProcessOrder1 from "./components/Admin1/ProcessOrder";
+import Dashboard1 from "./components/Admin1/Dashboard";
 // import axios from "axios";
 
 function App() {
@@ -162,6 +169,11 @@ function App() {
           />
           <Route
             exact
+            path="/admin/dashboard1"
+            element={<ProtectedRoute isAdmin={true} component={Dashboard1} />}
+          />
+          <Route
+            exact
             path="/admin/products"
             element={<ProtectedRoute isAdmin={true} component={ProductList} />}
           />
@@ -189,8 +201,20 @@ function App() {
           />
           <Route
             exact
+            path="/admin/product1/:id"
+            element={
+              <ProtectedRoute isAdmin={true} component={UpdateProduct1} />
+            }
+          />
+          <Route
+            exact
             path="/admin/orders"
             element={<ProtectedRoute isAdmin={true} component={OrderList} />}
+          />
+          <Route
+            exact
+            path="/admin/orders1"
+            element={<ProtectedRoute isAdmin={true} component={OrdersList1} />}
           />
           <Route
             exact
@@ -199,13 +223,30 @@ function App() {
           />
           <Route
             exact
+            path="/admin/order1/:id"
+            element={
+              <ProtectedRoute isAdmin={true} component={ProcessOrder1} />
+            }
+          />
+          <Route
+            exact
             path="/admin/users"
             element={<ProtectedRoute isAdmin={true} component={UsersList} />}
           />
           <Route
             exact
+            path="/admin/users1"
+            element={<ProtectedRoute isAdmin={true} component={UsersList1} />}
+          />
+          <Route
+            exact
             path="/admin/user/:id"
             element={<ProtectedRoute isAdmin={true} component={UpdateUser} />}
+          />
+          <Route
+            exact
+            path="/admin/user1/:id"
+            element={<ProtectedRoute isAdmin={true} component={UpdateUser1} />}
           />
           <Route
             exact
@@ -227,11 +268,16 @@ function App() {
           />
 
           <Route
-            path="/admin/story/new"
+            path="/admin/story"
             element={<ProtectedRoute isAdmin={true} component={NewStory} />}
           />
 
           <Route exact path="/stories" element={<Stories />} />
+
+          <Route
+            path="/admin/stories"
+            element={<ProtectedRoute isAdmin={true} component={Stories1} />}
+          />
 
           <Route exact path="/story/:id" element={<StoryDetails />} />
 

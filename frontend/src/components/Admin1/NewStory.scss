@@ -11,10 +11,18 @@ $white-color: #ffffff;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    max-width: 90rem;
+    // max-width: 90rem;
+    width: 100%;
     margin: auto;
 
+    .thumbnail{
+        width: 100%;
+        height: 100%;
+        max-height: 30rem;
+    }
+
     .text-editor{
+        width: 100%;
         background: white;
         margin: 1rem;
         >h1{
@@ -25,14 +33,21 @@ $white-color: #ffffff;
     .ql-editor {
         min-height: 10rem;
     }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     form > div{
         display: flex;
         flex-direction: column;
         margin: 1rem 0;
+        width: 100%;
     }
     .storyImagePreview{
         display: flex;
-        width: 80rem;
+        width: 100%;
+        // width: min(60rem, 100%);
         >div{
             display: flex;
             align-items: center;
@@ -55,6 +70,35 @@ $white-color: #ffffff;
                     font-size: 0.9rem;
                 }
             }
+        }
+    }
+}
+
+.story-box{
+    position: relative;
+    display: flex;
+    margin: 0.5rem;
+
+    .blogCard{
+        margin: 0;
+    }
+
+    .story-delete{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: $black-color;
+        font-size: 1.5rem;
+        background: $white-color;
+        border-radius: 0.2rem;
+        margin: 0.5rem;
+        padding: 0.1rem;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+
+        &:hover{
+            color: $brown-color;
+            font-size: 1.6rem;
         }
     }
 }

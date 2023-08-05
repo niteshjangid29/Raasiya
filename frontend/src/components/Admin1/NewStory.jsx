@@ -1,14 +1,15 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import "./NewStory.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, createStory } from "../../actions/storyActions";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import { NEW_STORY_RESET } from "../../constants/storyConstants";
 import axios from "axios";
+import Sidebar from "./Sidebar";
 
 const NewStory = () => {
   const dispatch = useDispatch();
@@ -174,53 +175,66 @@ const NewStory = () => {
   }, [error, alert, success, dispatch, navigate, story._id]);
 
   return (
-    <div className="newStory">
-      <div className="text-editor">
-        <h1>Write a Story</h1>
-        <form
-          action=""
-          encType="multipart/form-data"
-          onSubmit={createStorySubmitHandler}
-        >
-          <TextField
-            id="outlined-basic"
-            label="Title"
-            variant="outlined"
-            value={title}
-            placeholder="Write title of the Story"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="file"
-            name="thumbnail"
-            accept="image/*"
-            onChange={thumbnailDataChange}
-          />
-          <img src={thumbnailPreview} alt="Thumbnail Preview" />
-          <div>
-            <ReactQuill
-              theme="snow"
-              ref={quillRef}
-              value={content.value}
-              onChange={(value) => setContent({ value })}
-              placeholder={"Write something awesome..."}
-              modules={modules}
-              formats={formats}
-            />
-          </div>
-          <button
-            className="btn btn-primary"
-            type="submit"
-            disabled={loading || content.value === null ? true : false}
-          >
-            Create
-          </button>
-        </form>
-        {/* <div dangerouslySetInnerHTML={{ __html: content.value }}></div> */}
-        {/* <div>{content.value}</div> */}
-        {/* <ReactQuill value={content.value} readOnly theme="bubble" /> */}
-      </div>
-    </div>
+    <Fragment>
+      <Box sx={{ display: "flex" }}>
+        <Sidebar />
+        <Box component="main" className="create-product">
+          <h1 className="heading">Write a Story</h1>
+          <Box>
+            <div className="newStory">
+              <div className="text-editor">
+                <form
+                  action=""
+                  encType="multipart/form-data"
+                  onSubmit={createStorySubmitHandler}
+                >
+                  <TextField
+                    id="outlined-basic"
+                    label="Title"
+                    variant="outlined"
+                    value={title}
+                    placeholder="Write title of the Story"
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <input
+                    type="file"
+                    name="thumbnail"
+                    accept="image/*"
+                    onChange={thumbnailDataChange}
+                  />
+                  <img
+                    src={thumbnailPreview}
+                    className="thumbnail"
+                    alt="Thumbnail Preview"
+                  />
+                  <div>
+                    <ReactQuill
+                      theme="snow"
+                      ref={quillRef}
+                      value={content.value}
+                      onChange={(value) => setContent({ value })}
+                      placeholder={"Write something awesome..."}
+                      modules={modules}
+                      formats={formats}
+                    />
+                  </div>
+                  <button
+                    className="myBtn"
+                    type="submit"
+                    disabled={loading || content.value === null ? true : false}
+                  >
+                    Create New Story
+                  </button>
+                </form>
+                {/* <div dangerouslySetInnerHTML={{ __html: content.value }}></div> */}
+                {/* <div>{content.value}</div> */}
+                {/* <ReactQuill value={content.value} readOnly theme="bubble" /> */}
+              </div>
+            </div>
+          </Box>
+        </Box>
+      </Box>
+    </Fragment>
   );
 };
 
