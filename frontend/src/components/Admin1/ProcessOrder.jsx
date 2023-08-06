@@ -12,7 +12,11 @@ import "./ProcessOrder.scss";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { clearErrors, getOrderDetails } from "../../actions/orderActions";
+import {
+  clearErrors,
+  getOrderDetails,
+  updateOrder,
+} from "../../actions/orderActions";
 import { UPDATE_ORDER_RESET } from "../../constants/orderConstants";
 import Loader from "../layout/Loader/Loader";
 
@@ -26,6 +30,16 @@ const ProcessOrder1 = () => {
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
 
   const [status, setStatus] = useState("");
+
+  const updateOrderSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("status", status);
+
+    dispatch(updateOrder(orderId, myForm));
+  };
 
   useEffect(() => {
     if (error) {
@@ -89,7 +103,7 @@ const ProcessOrder1 = () => {
                           >
                             <p>Update Order Status</p>
 
-                            <form action="">
+                            <form action="" onSubmit={updateOrderSubmitHandler}>
                               <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">
                                   Change Staus
