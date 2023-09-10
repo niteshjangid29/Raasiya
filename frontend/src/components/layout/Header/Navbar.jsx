@@ -154,7 +154,7 @@ const Navbar = () => {
           <div className="nav-down">
             <ul className="nav-down-1">
               <li>
-                <Link to="/">Collections</Link>
+                <Link to="/collections">Collections</Link>
               </li>
               <li>
                 <Link to="/">Bedroom</Link>
@@ -167,47 +167,53 @@ const Navbar = () => {
                         </p>
                         <ul>
                           <li>
-                            <Link to="/">SINGLE</Link>
+                            <Link to="/categories/Bedsheet/Single">SINGLE</Link>
                           </li>
                           <li>
-                            <Link to="/">DOUBLE</Link>
+                            <Link to="/categories/Bedsheet/Double">DOUBLE</Link>
                           </li>
                           <li>
-                            <Link to="/">FITTED</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <p>QUILT</p>
-                        <ul>
-                          <li>
-                            <Link to="/">SINGLE</Link>
-                          </li>
-                          <li>
-                            <Link to="/">DOUBLE</Link>
-                          </li>
-                        </ul>
-                        <p>BLANKET</p>
-                        <ul>
-                          <li>
-                            <Link to="/">SINGLE</Link>
-                          </li>
-                          <li>
-                            <Link to="/">DOUBLE</Link>
+                            <Link to="/categories/Bedsheet/Fitted">FITTED</Link>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <p>KIDS</p>
+                        <p>
+                          <Link to="/categories/Quilt">QUILT</Link>
+                        </p>
                         <ul>
                           <li>
-                            <Link to="/">BEDSHEET</Link>
+                            <Link to="/categories/Quilt/Single">SINGLE</Link>
                           </li>
                           <li>
-                            <Link to="/">QUILT</Link>
+                            <Link to="/categories/Quilt/Double">DOUBLE</Link>
+                          </li>
+                        </ul>
+                        <p>
+                          <Link to="/categories/Blanket">BLANKET</Link>
+                        </p>
+                        <ul>
+                          <li>
+                            <Link to="/categories/Blanket/Single">SINGLE</Link>
                           </li>
                           <li>
-                            <Link to="/">DOHAR</Link>
+                            <Link to="/categories/Blanket/Double">DOUBLE</Link>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>
+                          <Link to="/categories/Kids">Kids</Link>
+                        </p>
+                        <ul>
+                          <li>
+                            <Link to="/categories/Kids/Bedsheet">BEDSHEET</Link>
+                          </li>
+                          <li>
+                            <Link to="/categories/Kids/Quilt">QUILT</Link>
+                          </li>
+                          <li>
+                            <Link to="/categories/Kids/Dohar">DOHAR</Link>
                           </li>
                         </ul>
                       </li>
@@ -224,22 +230,32 @@ const Navbar = () => {
                   <div>
                     <ul className="hover-box-left">
                       <li>
-                        <p>LIVING ROOM</p>
+                        <p>
+                          <Link to="/categories/Living-room">LIVING ROOM</Link>
+                        </p>
                         <ul>
                           <li>
-                            <Link to="/">CURTAIN</Link>
+                            <Link to="/categories/Living-room/Curtain">
+                              CURTAIN
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">CUSHIONS</Link>
+                            <Link to="/categories/Living-room/Cushions">
+                              CUSHIONS
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">UPHOLSTERY</Link>
+                            <Link to="/categories/Living-room/Upholstery">
+                              UPHOLSTERY
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">TABLE CLOTH</Link>
+                            <Link to="/categories/Living-room/Table-cloth">
+                              TABLE CLOTH
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">RUGS</Link>
+                            <Link to="/categories/Living-room/Rugs">RUGS</Link>
                           </li>
                         </ul>
                       </li>
@@ -256,19 +272,27 @@ const Navbar = () => {
                   <div>
                     <ul className="hover-box-left">
                       <li>
-                        <p>KITCHEN</p>
+                        <p>
+                          <Link to="/categories/Kitchen">KITCHEN</Link>
+                        </p>
                         <ul>
                           <li>
-                            <Link to="/">KITCHEN LINEN</Link>
+                            <Link to="/categories/Kitchen/Kitchen-linen">
+                              KITCHEN LINEN
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">APRON</Link>
+                            <Link to="/categories/Kitchen/Apron">APRON</Link>
                           </li>
                           <li>
-                            <Link to="/">DISH TOWEL</Link>
+                            <Link to="/categories/Kitchen/Dish-towel">
+                              DISH TOWEL
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">POT HOLDER</Link>
+                            <Link to="/categories/Kitchen/Pot-holder">
+                              POT HOLDER
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -285,19 +309,29 @@ const Navbar = () => {
                   <div>
                     <ul className="hover-box-left">
                       <li>
-                        <p>TOWEL</p>
+                        <p>
+                          <Link to="/categories/Towel">Towel</Link>
+                        </p>
                         <ul>
                           <li>
-                            <Link to="/">BATH TOWEL</Link>
+                            <Link to="/categories/Towel/Bath-towel">
+                              BATH TOWEL
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">HAND TOWEL</Link>
+                            <Link to="/categories/Towel/Hand-towel">
+                              HAND TOWEL
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">FACE TOWEL</Link>
+                            <Link to="/categories/Towel/Face-towel">
+                              FACE TOWEL
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/">KIDS TOWEL</Link>
+                            <Link to="/categories/Towel/Kids-towel">
+                              KIDS TOWEL
+                            </Link>
                           </li>
                         </ul>
                       </li>

@@ -167,6 +167,11 @@ $search-color: #F0EBE8;
                                     p{
                                         color: $brown-color;
                                         margin: 0;
+
+                                        a{
+                                            color: $brown-color;
+                                            text-transform: uppercase;
+                                        }
                                     }
                                     a{
                                         font-size: 0.9rem;
